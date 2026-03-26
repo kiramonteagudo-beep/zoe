@@ -180,12 +180,13 @@ function LangPicker({ lang, setLang }: { lang: Language; setLang: (l: Language) 
         <div
           className="lang-dropdown"
           style={{ position: 'fixed', top: dropPos.top, right: dropPos.right, zIndex: 9999 }}
+          onMouseDown={(e) => e.stopPropagation()}
         >
           {visibleLanguages.map((l) => (
             <button
               key={l}
               className={`lang-option ${lang === l ? 'active' : ''}`}
-              onClick={() => { setLang(l); setOpen(false); }}
+              onMouseDown={() => { setLang(l); setOpen(false); }}
             >
               {langLabels[l]}
             </button>
