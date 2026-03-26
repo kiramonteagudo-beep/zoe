@@ -200,23 +200,10 @@ function LangPicker({ lang, setLang }: { lang: Language; setLang: (l: Language) 
 // ─── MAIN APP ────────────────────────────────────────────────────
 type MainCat = 'bar' | 'cocktails' | 'spirits' | 'wine' | 'food' | 'coffee';
 
-function SpiritsIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="14" y="6" width="20" height="4" rx="2" fill="currentColor" opacity="0.9"/>
-      <path d="M16 10 L12 28 Q11 32 14 34 L20 36 L20 42 L28 42 L28 36 L34 34 Q37 32 36 28 L32 10 Z" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-      <path d="M16 10 L32 10 L36 28 Q37 32 34 34 L14 34 Q11 32 12 28 Z" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-      <path d="M13 22 Q20 25 35 22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
-      <line x1="20" y1="36" x2="28" y2="36" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-      <line x1="18" y1="42" x2="30" y2="42" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-    </svg>
-  );
-}
-
 const CATS: { id: MainCat; icon: React.ReactNode; labelKey: keyof Translation }[] = [
   { id: 'bar',      icon: '🍸', labelKey: 'cat_bar' },
   { id: 'cocktails', icon: '🍹', labelKey: 'cat_cocktails' },
-  { id: 'spirits',  icon: <SpiritsIcon />, labelKey: 'cat_spirits' },
+  { id: 'spirits',  icon: '🥃', labelKey: 'cat_spirits' },
   { id: 'wine',     icon: '🍷', labelKey: 'cat_wine' },
   { id: 'food',     icon: '🍽️', labelKey: 'cat_food' },
   { id: 'coffee',   icon: '☕', labelKey: 'cat_coffee' },
