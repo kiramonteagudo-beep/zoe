@@ -1,0 +1,347 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --font-sans: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+}
+
+:root {
+  /* ZOE Color Palette */
+  --blush: #f8d8d2;
+  --ivory: #f4f1ec;
+  --gold: #c8a97e;
+  --steel-blue: #6fa3c8;
+  --navy: #004060;
+  --charcoal: #1a1a1a;
+
+  --background: 37 33% 95%; /* ivory */
+  --foreground: 0 0% 10%; /* charcoal */
+  --border: 35 20% 82%;
+  --input: 37 33% 90%;
+  --ring: 35 40% 64%;
+  --card: 37 33% 98%;
+  --card-foreground: 0 0% 10%;
+  --primary: 200 100% 19%; /* navy */
+  --primary-foreground: 37 33% 95%;
+  --secondary: 35 40% 64%; /* gold */
+  --secondary-foreground: 0 0% 10%;
+  --muted: 37 20% 88%;
+  --muted-foreground: 0 0% 40%;
+  --accent: 207 44% 60%; /* steel-blue */
+  --accent-foreground: 0 0% 100%;
+
+  --app-font-sans: 'Cormorant Garamond', Georgia, serif;
+  --app-font-serif: 'Cormorant Garamond', Georgia, serif;
+  --radius: 0.25rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background-color: #f4f1ec;
+    color: #1a1a1a;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f4f1ec;
+}
+::-webkit-scrollbar-thumb {
+  background: #c8a97e;
+  border-radius: 3px;
+}
+
+/* Elegant section divider */
+.divider-gold {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #c8a97e, transparent);
+  margin: 2rem auto;
+  max-width: 400px;
+}
+
+.divider-gold-full {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #c8a97e, transparent);
+  margin: 1rem 0;
+}
+
+/* Menu item row */
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  border-bottom: 1px dotted rgba(200, 169, 126, 0.3);
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item-name {
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: #1a1a1a;
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.menu-item-desc {
+  font-size: 0.8rem;
+  color: #666;
+  font-style: italic;
+  margin-top: 0.15rem;
+}
+
+.menu-item-price {
+  font-size: 0.95rem;
+  color: #004060;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* Category tabs */
+.category-tab {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  color: #666;
+  white-space: nowrap;
+}
+
+.category-tab.active {
+  color: #004060;
+  border-bottom-color: #c8a97e;
+}
+
+.category-tab:hover {
+  color: #004060;
+}
+
+/* Signature cocktail card */
+.signature-card {
+  background: white;
+  border: 1px solid rgba(200, 169, 126, 0.3);
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,64,96,0.05);
+}
+
+.signature-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #004060;
+  margin-bottom: 0.4rem;
+}
+
+.signature-ingredients {
+  font-size: 0.85rem;
+  color: #666;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.signature-price {
+  font-size: 1rem;
+  color: #c8a97e;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+/* Hours badge */
+.hours-open {
+  color: #004060;
+  background: rgba(111, 163, 200, 0.15);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.hours-closed {
+  color: #999;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Language button */
+.lang-btn {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid rgba(200, 169, 126, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: #666;
+}
+
+.lang-btn.active {
+  background: #004060;
+  color: #f4f1ec;
+  border-color: #004060;
+}
+
+.lang-btn:hover:not(.active) {
+  border-color: #004060;
+  color: #004060;
+}
+
+/* Social button */
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2px;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  justify-content: center;
+}
+
+.social-btn-instagram {
+  background: linear-gradient(135deg, #f8d8d2, #c8a97e);
+  color: #1a1a1a;
+  border: 1px solid rgba(200, 169, 126, 0.4);
+}
+
+.social-btn-instagram:hover {
+  background: linear-gradient(135deg, #f0c8c0, #b89060);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(200, 169, 126, 0.3);
+}
+
+.social-btn-whatsapp {
+  background: #004060;
+  color: #f4f1ec;
+  border: 1px solid #004060;
+}
+
+.social-btn-whatsapp:hover {
+  background: #003050;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,64,96,0.3);
+}
+
+.social-btn-review {
+  background: white;
+  color: #1a1a1a;
+  border: 1px solid rgba(200, 169, 126, 0.5);
+}
+
+.social-btn-review:hover {
+  border-color: #c8a97e;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(200, 169, 126, 0.2);
+}
+
+/* Sticky nav */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(244, 241, 236, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(200, 169, 126, 0.3);
+}
+
+/* Section title */
+.section-title {
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #004060;
+  text-align: center;
+  font-weight: 400;
+}
+
+.section-subtitle {
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #c8a97e;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+/* Wine item */
+.wine-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.4rem 0;
+  border-bottom: 1px dotted rgba(200, 169, 126, 0.25);
+}
+
+.wine-price-glass {
+  font-size: 0.85rem;
+  color: #6fa3c8;
+  font-weight: 500;
+  text-align: right;
+  min-width: 50px;
+}
+
+.wine-price-bottle {
+  font-size: 0.9rem;
+  color: #004060;
+  font-weight: 700;
+  text-align: right;
+  min-width: 60px;
+}
+
+/* Scroll tabs container */
+.tabs-scroll {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tabs-scroll::-webkit-scrollbar {
+  display: none;
+}
