@@ -205,15 +205,17 @@ const ip = {
   stroke: 'white', strokeWidth: 1.5, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
 };
 
-// Bar — Leffe-style chalice (round bowl, narrow waist, wide base, foam)
+// Bar — Leffe-style chalice
 const BarIcon = () => (
   <svg {...ip}>
-    {/* Foam — smooth dome */}
-    <path d="M7 8 Q12 4 17 8" />
-    {/* Left side: bowl curves out, pinches to waist, flares to base */}
-    <path d="M7 8 C5 11 5 16 10 18 L10 20 Q9 21 7 22" />
-    {/* Right side: mirror */}
-    <path d="M17 8 C19 11 19 16 14 18 L14 20 Q15 21 17 22" />
+    {/* Foam dome */}
+    <path d="M7 9 Q12 5 17 9" />
+    {/* Foam / glass dividing line */}
+    <line x1="7" y1="9" x2="17" y2="9" />
+    {/* Left: gentle bowl bulge → long narrow stem → base flare */}
+    <path d="M7 9 C6 11 6 14 10 15 L10 20 Q9 21 7 22" />
+    {/* Right: mirror */}
+    <path d="M17 9 C18 11 18 14 14 15 L14 20 Q15 21 17 22" />
     {/* Base */}
     <line x1="7" y1="22" x2="17" y2="22" />
   </svg>
