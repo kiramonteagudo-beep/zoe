@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Language, visibleLanguages, langLabels, translations, Translation } from './data/translations';
 import {
   softDrinks, beers, craftBeers, draftBeers, aperitifs, amari,
@@ -11,7 +11,7 @@ import {
 } from './data/menuData';
 
 // ─── MODAL ──────────────────────────────────────────────────────
-interface ModalData { name: string; description?: string; }
+interface ModalData { name: string; description?: string; image?: string; }
 function ServingModal({ data, t, onClose }: { data: ModalData; t: Translation; onClose: () => void }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -24,10 +24,14 @@ function ServingModal({ data, t, onClose }: { data: ModalData; t: Translation; o
           <button className="modal-close" onClick={onClose}>✕</button>
         </div>
         <div className="modal-body">
-          <div className="modal-img-placeholder">
-            <span className="placeholder-icon">🍹</span>
-            <span>{t.comingSoon}</span>
-          </div>
+          {data.image ? (
+            <img src={data.image} alt={data.name} className="modal-photo" />
+          ) : (
+            <div className="modal-img-placeholder">
+              <span className="placeholder-icon">🍹</span>
+              <span>{t.comingSoon}</span>
+            </div>
+          )}
           {data.description && (
             <div className="modal-ingredients">{data.description}</div>
           )}
@@ -48,12 +52,12 @@ function InfoIcon() {
   );
 }
 
-// ─── ITEM ROW (info icon on LEFT) ────────────────────────────────
+// ─── ITEM ROW (info icon on LEFT, optional) ───────────────────────
 function ItemRow({ item, onInfo }: { item: MenuItem; onInfo?: () => void }) {
   return (
     <div className="item-row">
       {onInfo ? (
-        <button className="info-btn" onClick={onInfo} title="Come si serve" aria-label="Info">
+        <button className="info-btn" onClick={onInfo} title="Informazioni" aria-label="Info">
           <InfoIcon />
         </button>
       ) : (
@@ -70,13 +74,13 @@ function ItemRow({ item, onInfo }: { item: MenuItem; onInfo?: () => void }) {
   );
 }
 
-// ─── SIGNATURE CARD (info icon on LEFT) ──────────────────────────
+// ─── SIGNATURE CARD (info icon on LEFT, optional) ─────────────────
 function SigCard({ item, lang, onInfo }: { item: SignatureCocktail; lang: Language; onInfo?: () => void }) {
   const desc = item.descriptions[lang];
   return (
     <div className="sig-card">
       {onInfo ? (
-        <button className="info-btn sig-info-btn" onClick={onInfo} title="Come si serve" aria-label="Info">
+        <button className="info-btn sig-info-btn" onClick={onInfo} title="Informazioni" aria-label="Info">
           <InfoIcon />
         </button>
       ) : (
@@ -133,6 +137,45 @@ function SubTabs({ tabs, active, setActive }: {
           </button>
         ))}
       </div>
+    </div>
+  );
+}
+
+// ─── LANGUAGE PICKER DROPDOWN ─────────────────────────────────────
+function LangPicker({ lang, setLang }: { lang: Language; setLang: (l: Language) => void }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [open]);
+
+  return (
+    <div className="lang-picker" ref={ref}>
+      <button className="lang-trigger" onClick={() => setOpen((v) => !v)} aria-label="Change language">
+        {langLabels[lang]}
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: '4px', opacity: 0.7 }}>
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      {open && (
+        <div className="lang-dropdown">
+          {visibleLanguages.map((l) => (
+            <button
+              key={l}
+              className={`lang-option ${lang === l ? 'active' : ''}`}
+              onClick={() => { setLang(l); setOpen(false); }}
+            >
+              {langLabels[l]}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -220,36 +263,36 @@ export default function App() {
   }
 
   function renderContent() {
-    // BAR
+    // BAR — no info icons
     if (mainCat === 'bar') {
       const secTitle = subTabsMap.bar.find((s) => s.key === currentSub)?.label || '';
       if (currentSub === 'softDrinks') return (
         <><SecHeader title={secTitle} />
-          {softDrinks.map((i) => <ItemRow key={i.name} item={i} onInfo={() => openModal({ name: i.name })} />)}</>
+          {softDrinks.map((i) => <ItemRow key={i.name} item={i} />)}</>
       );
       if (currentSub === 'beers') return (
         <><SecHeader title={secTitle} />
-          {beers.map((i) => <ItemRow key={i.name} item={i} onInfo={() => openModal({ name: i.name })} />)}</>
+          {beers.map((i) => <ItemRow key={i.name} item={i} />)}</>
       );
       if (currentSub === 'craftBeers') return (
         <><SecHeader title={secTitle} />
-          {craftBeers.map((i) => <ItemRow key={i.name} item={i} onInfo={() => openModal({ name: i.name })} />)}</>
+          {craftBeers.map((i) => <ItemRow key={i.name} item={i} />)}</>
       );
       if (currentSub === 'draftBeers') return (
         <><SecHeader title={secTitle} />
-          {draftBeers.map((i) => <ItemRow key={i.name} item={i} onInfo={() => openModal({ name: i.name })} />)}</>
+          {draftBeers.map((i) => <ItemRow key={i.name} item={i} />)}</>
       );
       if (currentSub === 'aperitifs') return (
         <><SecHeader title={secTitle} note={t.correctionFee} />
-          {aperitifs.map((i) => <ItemRow key={i.name} item={i} onInfo={() => openModal({ name: i.name })} />)}</>
+          {aperitifs.map((i) => <ItemRow key={i.name} item={i} />)}</>
       );
       if (currentSub === 'amari') return (
         <><SecHeader title={secTitle} note={t.correctionFee} />
-          {amari.map((i) => <ItemRow key={i.name} item={i} onInfo={() => openModal({ name: i.name })} />)}</>
+          {amari.map((i) => <ItemRow key={i.name} item={i} />)}</>
       );
     }
 
-    // COCKTAILS
+    // COCKTAILS — keep info icons
     if (mainCat === 'cocktails') {
       if (currentSub === 'signature') return (
         <>
@@ -271,7 +314,7 @@ export default function App() {
       );
     }
 
-    // SPIRITS
+    // SPIRITS — no info icons
     if (mainCat === 'spirits') {
       const secTitle = subTabsMap.spirits.find((s) => s.key === currentSub)?.label || '';
       const lists: Record<string, MenuItem[]> = {
@@ -282,12 +325,12 @@ export default function App() {
       return (
         <>
           <SecHeader title={secTitle} />
-          {items.map((i) => <ItemRow key={i.name} item={i} onInfo={() => openModal({ name: i.name })} />)}
+          {items.map((i) => <ItemRow key={i.name} item={i} />)}
         </>
       );
     }
 
-    // WINE
+    // WINE — no info icons (WineRow)
     if (mainCat === 'wine') {
       const secTitle = subTabsMap.wine.find((s) => s.key === currentSub)?.label || '';
       const lists: Record<string, WineItem[]> = { red: redWines, white: whiteWines, sparkling };
@@ -338,37 +381,38 @@ export default function App() {
       );
     }
 
-    // COFFEE
+    // COFFEE — coffees / hotChoc / fruit: no icons; specials / milkMugs: icons
     if (mainCat === 'coffee') {
-      const lists: Record<string, MenuItem[]> = {
-        coffee: coffees, hotChoc: hotChocolates, dessert: desserts, fruit: fruits,
-      };
-      const sigLists: Record<string, SignatureCocktail[]> = {
-        specialCoffee: coffeeSpecials, milkMugs,
-      };
       const secTitle = subTabsMap.coffee.find((s) => s.key === currentSub)?.label || '';
+      const coffeeNote = <p className="coffee-hours-note">{t.coffeeHoursNote}</p>;
 
-      const coffeeNote = (
-        <p className="coffee-hours-note">{t.coffeeHoursNote}</p>
+      if (currentSub === 'coffee') return (
+        <>{coffeeNote}<SecHeader title={secTitle} />
+          {coffees.map((i) => <ItemRow key={i.name} item={i} />)}</>
       );
-
-      if (sigLists[currentSub]) {
-        return (
-          <>
-            {coffeeNote}
-            <SecHeader title={secTitle} />
-            {sigLists[currentSub].map((i) => (
-              <SigCard key={i.name} item={i} lang={lang} onInfo={() => openModal({ name: i.name, description: i.descriptions[lang] })} />
-            ))}
-          </>
-        );
-      }
-      return (
-        <>
-          {coffeeNote}
-          <SecHeader title={secTitle} />
-          {(lists[currentSub] || []).map((i) => <ItemRow key={i.name} item={i} onInfo={() => openModal({ name: i.name })} />)}
-        </>
+      if (currentSub === 'hotChoc') return (
+        <>{coffeeNote}<SecHeader title={secTitle} />
+          {hotChocolates.map((i) => <ItemRow key={i.name} item={i} />)}</>
+      );
+      if (currentSub === 'fruit') return (
+        <>{coffeeNote}<SecHeader title={secTitle} />
+          {fruits.map((i) => <ItemRow key={i.name} item={i} />)}</>
+      );
+      if (currentSub === 'dessert') return (
+        <>{coffeeNote}<SecHeader title={secTitle} />
+          {desserts.map((i) => <ItemRow key={i.name} item={i} onInfo={() => openModal({ name: i.name })} />)}</>
+      );
+      if (currentSub === 'specialCoffee') return (
+        <>{coffeeNote}<SecHeader title={secTitle} />
+          {coffeeSpecials.map((i) => (
+            <SigCard key={i.name} item={i} lang={lang} onInfo={() => openModal({ name: i.name, description: i.descriptions[lang] })} />
+          ))}</>
+      );
+      if (currentSub === 'milkMugs') return (
+        <>{coffeeNote}<SecHeader title={secTitle} />
+          {milkMugs.map((i) => (
+            <SigCard key={i.name} item={i} lang={lang} onInfo={() => openModal({ name: i.name, description: i.descriptions[lang], image: i.image })} />
+          ))}</>
       );
     }
 
@@ -376,7 +420,7 @@ export default function App() {
   }
 
   // Hours data
-  const today = new Date().getDay(); // 0=Sun,1=Mon,...
+  const today = new Date().getDay();
   const hoursRows = [
     { key: 'mon', day: t.monday, hours: t.monHours, open: true, dayIndex: 1 },
     { key: 'tue', day: t.tuesday, hours: t.tueHours, open: false, dayIndex: 2 },
@@ -395,17 +439,7 @@ export default function App() {
       {/* HEADER */}
       <div className="header">
         <div className="header-bg" />
-        <div className="lang-bar">
-          {visibleLanguages.map((l) => (
-            <button
-              key={l}
-              className={`lang-btn ${lang === l ? 'active' : ''}`}
-              onClick={() => setLang(l)}
-            >
-              {langLabels[l]}
-            </button>
-          ))}
-        </div>
+        <LangPicker lang={lang} setLang={setLang} />
         <img src="/logo.png" alt="ZOE" className="header-logo" />
         <p className="header-tagline">{t.tagline}</p>
       </div>
@@ -472,6 +506,17 @@ export default function App() {
             </svg>
             {t.leaveReview}
           </a>
+        </div>
+
+        <div className="footer-address">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ flexShrink: 0, opacity: 0.6 }}>
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <div>
+            <div>Via Funara lato Padre Pio 5/7 · 81054 San Prisco (CE)</div>
+            <div className="footer-address-sub">Affianco all'uscita San Prisco della Variante Capua–Maddaloni</div>
+          </div>
         </div>
 
         <p className="footer-copy">© ZOE Premium Bar & Restaurant</p>

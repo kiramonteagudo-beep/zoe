@@ -12,6 +12,7 @@ export interface SignatureCocktail {
   name: string;
   price: string;
   descriptions: MultiLang;
+  image?: string;
 }
 
 export interface WineItem {
@@ -632,6 +633,7 @@ export const milkMugs: SignatureCocktail[] = [
   {
     name: 'Leccese',
     price: '€ 6,00',
+    image: '/milkmug-leccese.jpg',
     descriptions: {
       it: 'Fondo cioccolato fondente, espresso, latte di mandorla, panna',
       en: 'Dark chocolate base, espresso, almond milk, whipped cream',
@@ -643,6 +645,7 @@ export const milkMugs: SignatureCocktail[] = [
   {
     name: 'Vegan Exotic',
     price: '€ 7,00',
+    image: '/milkmug-veganexotic.jpg',
     descriptions: {
       it: 'Fondo cioccolato bianco, latte di cocco, ananas sciroppata, passion fruit',
       en: 'White chocolate base, coconut milk, pineapple in syrup, passion fruit',
@@ -654,6 +657,7 @@ export const milkMugs: SignatureCocktail[] = [
   {
     name: 'Gran Caramel',
     price: '€ 5,00',
+    image: '/milkmug-grancaramel.jpg',
     descriptions: {
       it: 'Espresso, latte, sciroppo vaniglia, topping al caramello',
       en: 'Espresso, milk, vanilla syrup, caramel topping',
@@ -665,6 +669,7 @@ export const milkMugs: SignatureCocktail[] = [
   {
     name: 'Mocha',
     price: '€ 5,00',
+    image: '/milkmug-mocha.jpg',
     descriptions: {
       it: 'Espresso, latte, cioccolato al latte, panna montata',
       en: 'Espresso, milk, milk chocolate, whipped cream',
@@ -694,10 +699,10 @@ export const fruits: MenuItem[] = [
 
 // ─── FOOD ─────────────────────────────────────────────────────────
 export const snacks: MenuItem[] = [
-  { name: 'Patatine Fritte Cheddar + Bacon', price: '€ 6,00' },
-  { name: 'Patatine Fritte', price: '€ 5,00' },
-  { name: 'Patatine Fritte con Stracciata di Bufala e Bacon', price: '€ 6,00' },
-  { name: 'Patate Fritte con Mortadella, Stracciata di Bufala e Pistacchio Salato', price: '€ 6,00' },
+  { name: 'Patatine Fritte Cheddar + Bacon', price: '€ 6,00', note: 'da condividere' },
+  { name: 'Patatine Fritte', price: '€ 5,00', note: 'da condividere' },
+  { name: 'Patatine Fritte con Stracciata di Bufala e Bacon', price: '€ 6,00', note: 'da condividere' },
+  { name: 'Patate Fritte con Mortadella, Stracciata di Bufala e Pistacchio Salato', price: '€ 6,00', note: 'da condividere' },
   { name: 'Coppetta di Olive', price: '€ 3,50' },
   { name: 'Montanara Classica', price: '€ 5,00' },
   { name: 'Montanara a Modo Mio', price: '€ 7,00' },

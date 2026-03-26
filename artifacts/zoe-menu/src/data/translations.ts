@@ -8,7 +8,7 @@ export const langLabels: Record<Language, string> = {
   fr: 'FR',
 };
 
-export const visibleLanguages: Language[] = ['it', 'en', 'es', 'de'];
+export const visibleLanguages: Language[] = ['it', 'en', 'es', 'de', 'fr'];
 
 export interface Translation {
   tagline: string;
