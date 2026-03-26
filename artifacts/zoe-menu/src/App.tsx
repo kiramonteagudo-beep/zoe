@@ -205,19 +205,10 @@ const ip = {
   stroke: 'white', strokeWidth: 1.5, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
 };
 
-// Bar — Leffe-style chalice
+// Bar — simple tumbler
 const BarIcon = () => (
   <svg {...ip}>
-    {/* Foam dome */}
-    <path d="M7 9 Q12 5 17 9" />
-    {/* Foam / glass dividing line */}
-    <line x1="7" y1="9" x2="17" y2="9" />
-    {/* Left: gentle bowl bulge → long narrow stem → base flare */}
-    <path d="M7 9 C6 11 6 14 10 15 L10 20 Q9 21 7 22" />
-    {/* Right: mirror */}
-    <path d="M17 9 C18 11 18 14 14 15 L14 20 Q15 21 17 22" />
-    {/* Base */}
-    <line x1="7" y1="22" x2="17" y2="22" />
+    <path d="M5 8 H19 L18 21 H6 Z" />
   </svg>
 );
 
@@ -307,11 +298,10 @@ export default function App() {
   const subTabsMap: Record<MainCat, { key: string; label: string }[]> = {
     bar: [
       { key: 'softDrinks', label: t.sub_softDrinks },
+      { key: 'aperitifs', label: t.sub_aperitifs },
       { key: 'beers', label: t.sub_beers },
       { key: 'craftBeers', label: t.sub_craftBeers },
       { key: 'draftBeers', label: t.sub_draftBeers },
-      { key: 'aperitifs', label: t.sub_aperitifs },
-      { key: 'amari', label: t.sub_amari },
     ],
     cocktails: [
       { key: 'signature', label: t.sub_signature },
@@ -324,6 +314,7 @@ export default function App() {
       { key: 'whiskey', label: t.sub_whiskey },
       { key: 'grappa', label: t.sub_grappa },
       { key: 'tequila', label: t.sub_tequila },
+      { key: 'amari', label: t.sub_amari },
     ],
     wine: [
       { key: 'red', label: t.sub_red },
@@ -376,10 +367,6 @@ export default function App() {
         <><SecHeader title={secTitle} note={t.correctionFee} />
           {aperitifs.map((i) => <ItemRow key={i.name} item={i} />)}</>
       );
-      if (currentSub === 'amari') return (
-        <><SecHeader title={secTitle} note={t.correctionFee} />
-          {amari.map((i) => <ItemRow key={i.name} item={i} />)}</>
-      );
     }
 
     // COCKTAILS — keep info icons
@@ -409,7 +396,7 @@ export default function App() {
       const secTitle = subTabsMap.spirits.find((s) => s.key === currentSub)?.label || '';
       const lists: Record<string, MenuItem[]> = {
         gin: ginTonics, vodka: vodkaTonics, rum: rums,
-        whiskey: whiskeys, grappa: grappas, tequila: tequilas,
+        whiskey: whiskeys, grappa: grappas, tequila: tequilas, amari,
       };
       const items = lists[currentSub] || [];
       return (

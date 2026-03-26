@@ -268,6 +268,50 @@ export const signatureCocktails: SignatureCocktail[] = [
       fr: 'Tequila Don Julio Blanco, Cordial de Pêche, Jus de Citron Vert',
     },
   },
+  {
+    name: 'Vasinicola',
+    price: '€ 9,00',
+    descriptions: {
+      it: 'Rum Clairin Communal, Rum Scuro Hechicera, Lime, Sciroppo, Foglie di Basilico',
+      en: 'Clairin Communal Rum, Hechicera Dark Rum, Lime, Syrup, Fresh Basil Leaves',
+      es: 'Ron Clairin Communal, Ron Oscuro Hechicera, Lima, Jarabe, Hojas de Albahaca',
+      de: 'Clairin Communal Rum, Hechicera Dunkler Rum, Limette, Sirup, Basilikumblätter',
+      fr: 'Rhum Clairin Communal, Rhum Brun Hechicera, Citron Vert, Sirop, Feuilles de Basilic',
+    },
+  },
+  {
+    name: "L'Orcula",
+    price: '€ 9,00',
+    descriptions: {
+      it: 'Gin alla Melannurca H.M., Lime, Sciroppo, Bitter al Cacao',
+      en: 'Annurca Apple Gin H.M., Lime, Syrup, Cocoa Bitters',
+      es: 'Gin de Manzana Annurca H.M., Lima, Jarabe, Bitter de Cacao',
+      de: 'Annurca-Apfel-Gin H.M., Limette, Sirup, Kakao-Bitters',
+      fr: 'Gin à la Pomme Annurca H.M., Citron Vert, Sirop, Bitter Cacao',
+    },
+  },
+  {
+    name: 'Essenza',
+    price: '€ 9,00',
+    descriptions: {
+      it: 'Amaro Locale, Vodka Absolut, Top di Soda, Succo di Arancia, Foglie di Menta',
+      en: 'Local Amaro, Absolut Vodka, Soda, Orange Juice, Fresh Mint Leaves',
+      es: 'Amaro Local, Vodka Absolut, Soda, Zumo de Naranja, Hojas de Menta',
+      de: 'Lokaler Amaro, Absolut Vodka, Soda, Orangensaft, Frische Minzblätter',
+      fr: 'Amaro Local, Vodka Absolut, Soda, Jus d\'Orange, Feuilles de Menthe',
+    },
+  },
+  {
+    name: "Fico d'India",
+    price: '€ 9,00',
+    descriptions: {
+      it: "Altos Tequila, Liquore di Fico d'India, Succo di Lime, Sciroppo d'Agave",
+      en: 'Altos Tequila, Prickly Pear Liqueur, Lime Juice, Agave Syrup',
+      es: 'Tequila Altos, Licor de Higo Chumbo, Zumo de Lima, Jarabe de Agave',
+      de: 'Altos Tequila, Kaktusfeigenlikör, Limettensaft, Agavensirup',
+      fr: "Tequila Altos, Liqueur de Figue de Barbarie, Jus de Citron Vert, Sirop d'Agave",
+    },
+  },
 ];
 
 export const mocktails: SignatureCocktail[] = [
