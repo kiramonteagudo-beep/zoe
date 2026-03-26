@@ -56,10 +56,10 @@ body {
 }
 /* ─── LANGUAGE PICKER ─────────────────────────── */
 .lang-bar {
-  position: absolute;
+  position: fixed;
   top: 0.85rem;
   right: 0.9rem;
-  z-index: 2;
+  z-index: 9000;
 }
 .lang-trigger {
   display: flex;

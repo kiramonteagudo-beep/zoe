@@ -465,12 +465,14 @@ export default function App() {
       {/* MODAL */}
       {modal && <ServingModal data={modal} t={t} onClose={closeModal} />}
 
+      {/* LANGUAGE PICKER — fixed, always on top */}
+      <div className="lang-bar">
+        <LangPicker lang={lang} setLang={setLang} />
+      </div>
+
       {/* HEADER */}
       <div className="header">
         <div className="header-bg" />
-        <div className="lang-bar">
-          <LangPicker lang={lang} setLang={setLang} />
-        </div>
         <img src="/logo.png" alt="ZOE" className="header-logo" />
         <p className="header-tagline">{t.tagline}</p>
       </div>
