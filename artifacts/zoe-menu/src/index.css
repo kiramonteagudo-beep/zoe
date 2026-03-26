@@ -30,7 +30,6 @@ body {
   padding: 1.5rem 1.25rem 1.25rem;
   text-align: center;
   position: relative;
-  overflow: hidden;
 }
 .header-bg {
   position: absolute;
