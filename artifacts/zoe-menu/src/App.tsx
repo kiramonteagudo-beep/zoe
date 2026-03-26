@@ -208,8 +208,8 @@ const ip = {
 // Bar — Leffe-style chalice (round bowl, narrow waist, wide base, foam)
 const BarIcon = () => (
   <svg {...ip}>
-    {/* Foam — 3 bumps */}
-    <path d="M7 8 Q8.5 4 10 8 Q12 4 14 8 Q15.5 4 17 8" />
+    {/* Foam — smooth dome */}
+    <path d="M7 8 Q12 4 17 8" />
     {/* Left side: bowl curves out, pinches to waist, flares to base */}
     <path d="M7 8 C5 11 5 16 10 18 L10 20 Q9 21 7 22" />
     {/* Right side: mirror */}
