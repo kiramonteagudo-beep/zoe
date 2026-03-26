@@ -201,73 +201,67 @@ function LangPicker({ lang, setLang }: { lang: Language; setLang: (l: Language) 
 type MainCat = 'bar' | 'cocktails' | 'spirits' | 'wine' | 'food' | 'coffee';
 
 const ip = {
-  width: 32, height: 32, viewBox: '0 0 32 32', fill: 'none',
-  stroke: 'white', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
+  width: 30, height: 30, viewBox: '0 0 24 24', fill: 'none',
+  stroke: 'white', strokeWidth: 1.5, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
 };
-const wf = 'rgba(255,255,255,0.08)'; // subtle white fill
 
-// Bar — martini glass (geometric, with olive)
+// Bar — martini glass
 const BarIcon = () => (
   <svg {...ip}>
-    <polygon points="4,6 28,6 16,21" fill={wf} stroke="white" strokeWidth="2" />
-    <line x1="16" y1="21" x2="16" y2="28" />
-    <line x1="11" y1="28" x2="21" y2="28" />
-    <circle cx="16" cy="10" r="1.5" fill="white" stroke="none" />
+    <line x1="3" y1="4" x2="21" y2="4" />
+    <line x1="3" y1="4" x2="12" y2="15" />
+    <line x1="21" y1="4" x2="12" y2="15" />
+    <line x1="12" y1="15" x2="12" y2="21" />
+    <line x1="8" y1="21" x2="16" y2="21" />
+    <circle cx="12" cy="8" r="1" fill="white" stroke="none" />
   </svg>
 );
 
-// Cocktails — champagne flute (bubbles inside)
+// Cocktails — Collins / highball glass with straw
 const CocktailsIcon = () => (
   <svg {...ip}>
-    <path d="M12 4 L11 22 Q11 27 16 27 Q21 27 21 22 L20 4 Z" fill={wf} />
-    <line x1="16" y1="27" x2="16" y2="30" />
-    <line x1="13" y1="30" x2="19" y2="30" />
-    <circle cx="16" cy="19" r="1" fill="white" stroke="none" />
-    <circle cx="14" cy="13" r="0.8" fill="white" stroke="none" />
-    <circle cx="18" cy="9" r="0.8" fill="white" stroke="none" />
+    <path d="M7 3 L8 21 H16 L17 3 Z" />
+    <line x1="15" y1="3" x2="10" y2="21" />
   </svg>
 );
 
-// Spirits — whiskey bottle (with label band)
+// Spirits — whiskey tumbler
 const SpiritsIcon = () => (
   <svg {...ip}>
-    <path d="M13 13 L11 27 Q11 29 13 29 L19 29 Q21 29 21 27 L19 13 Z" fill={wf} />
-    <path d="M13 13 L13 8 Q13 6 14 5 L18 5 Q19 6 19 8 L19 13" />
-    <line x1="11" y1="21" x2="21" y2="21" />
-    <line x1="14" y1="5" x2="18" y2="5" />
+    <path d="M4 8 H20 L19 20 Q19 21 18 21 H6 Q5 21 5 20 Z" />
+    <line x1="5" y1="14" x2="19" y2="14" />
   </svg>
 );
 
-// Wine — wine glass with liquid fill
+// Wine — wine glass
 const WineIcon = () => (
   <svg {...ip}>
-    <path d="M8 5 Q6 17 16 22 Q26 17 24 5" fill={wf} />
-    <line x1="8" y1="5" x2="24" y2="5" />
-    <path d="M10 15 Q10 22 16 22 Q22 22 22 15" fill={wf} />
-    <line x1="16" y1="22" x2="16" y2="29" />
-    <line x1="11" y1="29" x2="21" y2="29" />
+    <line x1="6" y1="3" x2="18" y2="3" />
+    <path d="M6 3 Q4 13 12 17 Q20 13 18 3" />
+    <line x1="12" y1="17" x2="12" y2="22" />
+    <line x1="8" y1="22" x2="16" y2="22" />
   </svg>
 );
 
-// Food — restaurant cloche (dome cover)
+// Food — cloche
 const FoodIcon = () => (
   <svg {...ip}>
-    <path d="M3 21 Q3 7 16 7 Q29 7 29 21" fill={wf} />
-    <line x1="3" y1="21" x2="29" y2="21" />
-    <line x1="1" y1="25" x2="31" y2="25" />
-    <line x1="16" y1="7" x2="16" y2="4" />
-    <circle cx="16" cy="3" r="2" fill="white" stroke="none" />
+    <path d="M2 15 Q2 6 12 6 Q22 6 22 15" />
+    <line x1="2" y1="15" x2="22" y2="15" />
+    <line x1="1" y1="18" x2="23" y2="18" />
+    <line x1="12" y1="6" x2="12" y2="4" />
+    <line x1="10" y1="4" x2="14" y2="4" />
   </svg>
 );
 
-// Coffee — espresso cup with saucer and steam
+// Coffee — espresso cup
 const CoffeeIcon = () => (
   <svg {...ip}>
-    <path d="M7 16 L8 25 Q8 28 11 28 L21 28 Q24 28 24 25 L25 16 Z" fill={wf} />
-    <path d="M24 19 Q29 19 29 22 Q29 26 24 26" />
-    <ellipse cx="16" cy="30" rx="11" ry="2" />
-    <path d="M12 13 Q13.5 10 12 7" />
-    <path d="M20 13 Q21.5 10 20 7" />
+    <path d="M5 11 L6 19 Q6 21 8 21 H16 Q18 21 18 19 L19 11 Z" />
+    <path d="M19 13 Q23 13 23 16 Q23 19 19 19" />
+    <path d="M3 22 Q12 24 21 22" />
+    <path d="M9 8 Q10 6 9 4" />
+    <path d="M15 8 Q16 6 15 4" />
   </svg>
 );
 
