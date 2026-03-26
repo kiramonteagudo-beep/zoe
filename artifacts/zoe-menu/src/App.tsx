@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Language, visibleLanguages, langLabels, translations, Translation } from './data/translations';
 import {
   softDrinks, beers, craftBeers, draftBeers, aperitifs, amari,
@@ -141,44 +141,6 @@ function SubTabs({ tabs, active, setActive }: {
   );
 }
 
-// ─── LANGUAGE PICKER DROPDOWN ─────────────────────────────────────
-function LangPicker({ lang, setLang }: { lang: Language; setLang: (l: Language) => void }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    }
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, [open]);
-
-  return (
-    <div className="lang-picker" ref={ref}>
-      <button className="lang-trigger" onClick={() => setOpen((v) => !v)} aria-label="Change language">
-        {langLabels[lang]}
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: '4px', opacity: 0.7 }}>
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
-      </button>
-      {open && (
-        <div className="lang-dropdown">
-          {visibleLanguages.map((l) => (
-            <button
-              key={l}
-              className={`lang-option ${lang === l ? 'active' : ''}`}
-              onClick={() => { setLang(l); setOpen(false); }}
-            >
-              {langLabels[l]}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 // ─── MAIN APP ────────────────────────────────────────────────────
 type MainCat = 'bar' | 'cocktails' | 'spirits' | 'wine' | 'food' | 'coffee';
@@ -452,7 +414,17 @@ export default function App() {
       {/* HEADER */}
       <div className="header">
         <div className="header-bg" />
-        <LangPicker lang={lang} setLang={setLang} />
+        <div className="lang-bar">
+          {visibleLanguages.map((l) => (
+            <button
+              key={l}
+              className={`lang-btn ${lang === l ? 'active' : ''}`}
+              onClick={() => setLang(l)}
+            >
+              {langLabels[l]}
+            </button>
+          ))}
+        </div>
         <img src="/logo.png" alt="ZOE" className="header-logo" />
         <p className="header-tagline">{t.tagline}</p>
       </div>

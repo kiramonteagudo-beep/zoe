@@ -54,58 +54,38 @@ body {
   position: relative;
   z-index: 1;
 }
-/* ─── LANGUAGE PICKER ─────────────────────────── */
-.lang-picker {
+/* ─── LANGUAGE BAR ────────────────────────────── */
+.lang-bar {
   position: absolute;
   top: 0.85rem;
   right: 0.9rem;
-  z-index: 10;
-}
-.lang-trigger {
   display: flex;
-  align-items: center;
-  padding: 0.3rem 0.65rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  font-family: inherit;
-  border: 1px solid rgba(200,169,126,0.5);
-  background: rgba(0,47,71,0.6);
-  color: var(--gold);
-  cursor: pointer;
-  border-radius: 3px;
-  font-weight: 600;
-  transition: all 0.2s;
-  backdrop-filter: blur(4px);
+  gap: 0.25rem;
+  z-index: 2;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 160px;
 }
-.lang-trigger:hover { background: rgba(200,169,126,0.15); border-color: var(--gold); }
-.lang-dropdown {
-  position: absolute;
-  top: calc(100% + 4px);
-  right: 0;
-  background: var(--navy-dark);
-  border: 1px solid rgba(200,169,126,0.3);
-  border-radius: 3px;
-  overflow: hidden;
-  min-width: 68px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-  animation: fadeIn 0.15s ease;
-}
-.lang-option {
-  display: block;
-  width: 100%;
-  padding: 0.5rem 0.9rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+.lang-btn {
+  padding: 0.25rem 0.55rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
   font-family: inherit;
+  border: 1px solid rgba(200,169,126,0.4);
   background: transparent;
-  color: rgba(244,241,236,0.6);
-  border: none;
+  color: rgba(244,241,236,0.5);
   cursor: pointer;
-  text-align: left;
-  transition: all 0.15s;
+  border-radius: 2px;
+  transition: all 0.2s;
+  white-space: nowrap;
 }
-.lang-option:hover { background: rgba(200,169,126,0.12); color: var(--ivory); }
-.lang-option.active { color: var(--gold); font-weight: 600; background: rgba(200,169,126,0.08); }
+.lang-btn.active {
+  background: var(--gold);
+  color: var(--navy-dark);
+  border-color: var(--gold);
+  font-weight: 600;
+}
+.lang-btn:hover:not(.active) { color: var(--gold); border-color: var(--gold); }
 
 /* ─── CATEGORY GRID ──────────────────────────── */
 .category-grid {
