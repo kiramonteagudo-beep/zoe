@@ -205,8 +205,17 @@ const ip = {
   stroke: 'white', strokeWidth: 1.5, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
 };
 
-// Bar — martini glass
+// Bar — freshly drafted beer mug with foam
 const BarIcon = () => (
+  <svg {...ip}>
+    <path d="M5 9 H17 L16 21 H6 Z" />
+    <path d="M5 9 Q7 5 9 9 Q11 5 13 9 Q15 5 17 9" />
+    <path d="M17 11 Q22 11 22 15 Q22 19 17 19" />
+  </svg>
+);
+
+// Cocktails — martini glass with olive
+const CocktailsIcon = () => (
   <svg {...ip}>
     <line x1="3" y1="4" x2="21" y2="4" />
     <line x1="3" y1="4" x2="12" y2="15" />
@@ -214,14 +223,6 @@ const BarIcon = () => (
     <line x1="12" y1="15" x2="12" y2="21" />
     <line x1="8" y1="21" x2="16" y2="21" />
     <circle cx="12" cy="8" r="1" fill="white" stroke="none" />
-  </svg>
-);
-
-// Cocktails — Collins / highball glass with straw
-const CocktailsIcon = () => (
-  <svg {...ip}>
-    <path d="M7 3 L8 21 H16 L17 3 Z" />
-    <line x1="15" y1="3" x2="10" y2="21" />
   </svg>
 );
 
