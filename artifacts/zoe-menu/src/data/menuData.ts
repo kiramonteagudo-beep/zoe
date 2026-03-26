@@ -292,7 +292,7 @@ export const signatureCocktails: SignatureCocktail[] = [
   },
   {
     name: 'Essenza',
-    price: '€ 9,00',
+    price: '€ 8,00',
     descriptions: {
       it: 'Amaro Locale, Vodka Absolut, Top di Soda, Succo di Arancia, Foglie di Menta',
       en: 'Local Amaro, Absolut Vodka, Soda, Orange Juice, Fresh Mint Leaves',
@@ -303,7 +303,7 @@ export const signatureCocktails: SignatureCocktail[] = [
   },
   {
     name: "Fico d'India",
-    price: '€ 9,00',
+    price: '€ 8,00',
     descriptions: {
       it: "Altos Tequila, Liquore di Fico d'India, Succo di Lime, Sciroppo d'Agave",
       en: 'Altos Tequila, Prickly Pear Liqueur, Lime Juice, Agave Syrup',
