@@ -8,6 +8,8 @@ export const langLabels: Record<Language, string> = {
   fr: 'FR',
 };
 
+export const visibleLanguages: Language[] = ['it', 'en', 'es', 'de'];
+
 export interface Translation {
   tagline: string;
   openingHours: string;
@@ -17,32 +19,26 @@ export interface Translation {
   monHours: string; tueHours: string; wedHours: string; thuHours: string;
   friHours: string; satHours: string; sunHours: string;
   followUs: string; contactUs: string; leaveReview: string;
-  // Categories
   cat_bar: string; cat_cocktails: string; cat_spirits: string;
   cat_wine: string; cat_food: string; cat_coffee: string;
-  // Bar subcats
   sub_softDrinks: string; sub_beers: string; sub_craftBeers: string;
   sub_draftBeers: string; sub_aperitifs: string; sub_amari: string;
-  // Cocktail subcats
   sub_signature: string; sub_mocktails: string;
-  // Spirits subcats
   sub_gin: string; sub_vodka: string; sub_rum: string;
   sub_whiskey: string; sub_grappa: string; sub_tequila: string;
-  // Wine subcats
   sub_red: string; sub_white: string; sub_sparkling: string;
-  // Food subcats
   sub_snacks: string; sub_bruschette: string; sub_pinse: string;
   sub_taglieri: string;
-  // Coffee subcats
   sub_coffee: string; sub_specialCoffee: string; sub_hotChoc: string;
   sub_milkMugs: string; sub_dessert: string; sub_fruit: string;
-  // Labels
   glass: string; bottle: string;
   ibaNotes: string; premiumIba: string;
   signatureNote: string; correctionFee: string;
   servingGuide: string; comingSoon: string; close: string;
   teaNote: string;
   tableService: string;
+  taiglieriNote: string;
+  coffeeHoursNote: string;
 }
 
 export const translations: Record<Language, Translation> = {
@@ -74,6 +70,8 @@ export const translations: Record<Language, Translation> = {
     servingGuide: 'Come si serve', comingSoon: 'Immagini in arrivo...', close: 'Chiudi',
     teaNote: 'Consulta il menù cartaceo',
     tableService: 'Il servizio al tavolo termina all\'01:00',
+    taiglieriNote: 'Lavorando sempre con il massimo della freschezza, la selezione può variare di giorno in giorno. Ogni tagliere potrebbe presentare abbinamenti e prodotti sempre diversi.',
+    coffeeHoursNote: 'La caffetteria chiude alle 22:00. Caffè e bevande calde restano disponibili al bar fino alle 00:00.',
   },
   en: {
     tagline: 'Premium Bar & Restaurant',
@@ -103,6 +101,8 @@ export const translations: Record<Language, Translation> = {
     servingGuide: 'How it\'s served', comingSoon: 'Images coming soon...', close: 'Close',
     teaNote: 'Please refer to the paper menu',
     tableService: 'Table service until 1:00 AM',
+    taiglieriNote: 'We always work with the freshest ingredients, so our selection may vary day by day. Each board may feature different products and pairings every time.',
+    coffeeHoursNote: 'The coffee bar closes at 10:00 PM. Coffee and hot drinks remain available at the bar until midnight.',
   },
   es: {
     tagline: 'Bar & Restaurante Premium',
@@ -132,6 +132,8 @@ export const translations: Record<Language, Translation> = {
     servingGuide: 'Cómo se sirve', comingSoon: 'Imágenes próximamente...', close: 'Cerrar',
     teaNote: 'Consulte el menú en papel',
     tableService: 'Servicio de mesa hasta la 1:00',
+    taiglieriNote: 'Trabajamos siempre con ingredientes frescos, por lo que la selección puede variar cada día. Cada tabla puede presentar productos y maridajes diferentes en cada visita.',
+    coffeeHoursNote: 'La cafetería cierra a las 22:00. El café y las bebidas calientes siguen disponibles en el bar hasta la medianoche.',
   },
   de: {
     tagline: 'Premium Bar & Restaurant',
@@ -161,6 +163,8 @@ export const translations: Record<Language, Translation> = {
     servingGuide: 'Wie es serviert wird', comingSoon: 'Bilder folgen in Kürze...', close: 'Schließen',
     teaNote: 'Auf der Papierkarte ansehen',
     tableService: 'Tischservice bis 1:00 Uhr',
+    taiglieriNote: 'Da wir stets mit frischesten Zutaten arbeiten, kann die Auswahl täglich variieren. Jede Wurstplatte kann bei jedem Besuch andere Produkte und Kombinationen bieten.',
+    coffeeHoursNote: 'Die Kaffeebar schließt um 22:00 Uhr. Kaffee und Heißgetränke bleiben bis Mitternacht an der Bar erhältlich.',
   },
   fr: {
     tagline: 'Bar & Restaurant Premium',
@@ -190,5 +194,7 @@ export const translations: Record<Language, Translation> = {
     servingGuide: 'Comment c\'est servi', comingSoon: 'Images bientôt disponibles...', close: 'Fermer',
     teaNote: 'Consultez le menu papier',
     tableService: 'Service à table jusqu\'à 1h00',
+    taiglieriNote: 'Nous travaillons toujours avec les ingrédients les plus frais, donc la sélection peut varier chaque jour.',
+    coffeeHoursNote: 'Le bar à café ferme à 22h00. Café et boissons chaudes restent disponibles au bar jusqu\'à minuit.',
   },
 };
