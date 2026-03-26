@@ -1,19 +1,28 @@
+import type { Language } from './translations';
+
+export type MultiLang = Record<Language, string>;
+
 export interface MenuItem {
   name: string;
   price?: string;
-  description?: string;
   note?: string;
 }
 
-export interface MenuSection {
-  title: string;
-  titleKey: string;
-  items: MenuItem[];
-  note?: string;
+export interface SignatureCocktail {
+  name: string;
+  price: string;
+  descriptions: MultiLang;
 }
 
+export interface WineItem {
+  name: string;
+  priceGlass?: string;
+  priceBottle?: string;
+}
+
+// ─── BAR ─────────────────────────────────────────────────────────
 export const softDrinks: MenuItem[] = [
-  { name: 'Acqua 0,5', price: '€ 1,50' },
+  { name: 'Acqua 0,5' , price: '€ 1,50' },
   { name: 'Succo di Frutta', price: '€ 3,00' },
   { name: 'Spremuta d\'Arancia', price: '€ 3,50' },
   { name: 'Coca Cola', price: '€ 3,50' },
@@ -80,133 +89,267 @@ export const amari: MenuItem[] = [
   { name: 'Altri Amari', price: '€ 5,00' },
 ];
 
-export interface SignatureCocktail {
-  name: string;
-  ingredients: string;
-  price: string;
-}
-
+// ─── COCKTAILS ───────────────────────────────────────────────────
 export const signatureCocktails: SignatureCocktail[] = [
   {
     name: 'Il Parallelo',
-    ingredients: 'Gin Bulldog, Maraschino, Citric Blend, Sciroppo di Aperol, Acqua Faba',
     price: '€ 9,00',
+    descriptions: {
+      it: 'Gin Bulldog, Maraschino, Citric Blend, Sciroppo di Aperol, Acqua Faba',
+      en: 'Gin Bulldog, Maraschino, Citric Blend, Aperol Syrup, Aquafaba',
+      es: 'Gin Bulldog, Maraschino, Mezcla Cítrica, Jarabe de Aperol, Aquafaba',
+      de: 'Gin Bulldog, Maraschino, Zitruszubereitung, Aperol-Sirup, Aquafaba',
+      fr: 'Gin Bulldog, Maraschino, Mélange Citrique, Sirop d\'Aperol, Aquafaba',
+    },
   },
   {
     name: 'Malocchio',
-    ingredients: 'Tanqueray No 10, Vermouth Extra Dry, Fill di Prosecco Extra Dry, Gocce di Olio al Basilico',
     price: '€ 11,00',
+    descriptions: {
+      it: 'Tanqueray No 10, Vermouth Extra Dry, Fill di Prosecco Extra Dry, Gocce di Olio al Basilico',
+      en: 'Tanqueray No 10, Extra Dry Vermouth, Prosecco Extra Dry, Drops of Basil Oil',
+      es: 'Tanqueray No 10, Vermut Extra Seco, Prosecco Extra Seco, Gotas de Aceite de Albahaca',
+      de: 'Tanqueray No 10, Extra Dry Vermouth, Prosecco Extra Dry, Basilikumöl-Tropfen',
+      fr: 'Tanqueray No 10, Vermouth Extra Dry, Prosecco Extra Dry, Gouttes d\'Huile de Basilic',
+    },
   },
   {
     name: 'Masaniello',
-    ingredients: 'Pampero Bianco infuso al Melone Retato, Succo di Lime, Sciroppo di Zucchero, Marmellata H.M. Passion Fruit',
     price: '€ 9,00',
+    descriptions: {
+      it: 'Pampero Bianco infuso al Melone Retato, Succo di Lime, Sciroppo di Zucchero, Marmellata H.M. Passion Fruit',
+      en: 'Pampero Bianco infused with Cantaloupe Melon, Lime Juice, Sugar Syrup, Passion Fruit Jam H.M.',
+      es: 'Pampero Bianco macerado en Melón Cantalupo, Zumo de Lima, Jarabe de Azúcar, Mermelada de Maracuyá H.M.',
+      de: 'Pampero Bianco mit Honigmelone infusiert, Limettensaft, Zuckersirup, Passionsfrucht-Konfitüre H.M.',
+      fr: 'Pampero Bianco infusé au Melon Cantaloup, Jus de Citron Vert, Sirop de Sucre, Confiture Passion H.M.',
+    },
   },
   {
     name: 'Munaciello',
-    ingredients: 'Wild Turkey Rye, Vermouth del Professore, Angostura Bitter, Miele Sciolto alla Vaniglia',
     price: '€ 10,00',
+    descriptions: {
+      it: 'Wild Turkey Rye, Vermouth del Professore, Angostura Bitter, Miele Sciolto alla Vaniglia',
+      en: 'Wild Turkey Rye, Vermouth del Professore, Angostura Bitters, Vanilla-Infused Honey',
+      es: 'Wild Turkey Rye, Vermouth del Professore, Angostura Bitter, Miel con Vainilla',
+      de: 'Wild Turkey Rye, Vermouth del Professore, Angostura Bitters, Vanillehonig',
+      fr: 'Wild Turkey Rye, Vermouth del Professore, Angostura Bitter, Miel à la Vanille',
+    },
   },
   {
     name: 'Kamille',
-    ingredients: 'Gin infuso ai Fiori di Camomilla, Miele di Castagno, Succo di Lime, Soda',
     price: '€ 9,00',
+    descriptions: {
+      it: 'Gin infuso ai Fiori di Camomilla, Miele di Castagno, Succo di Lime, Soda',
+      en: 'Chamomile Flower-Infused Gin, Chestnut Honey, Lime Juice, Soda Water',
+      es: 'Gin Macerado en Flores de Manzanilla, Miel de Castaño, Zumo de Lima, Soda',
+      de: 'Kamillenbüten-Gin, Kastanienhonig, Limettensaft, Sodawasser',
+      fr: 'Gin Infusé à la Camomille, Miel de Châtaignier, Jus de Citron Vert, Soda',
+    },
   },
   {
     name: 'Kentucky Derby',
-    ingredients: 'Bulleit 10 Anni, Sciroppo di Zucchero alla Cannella, Foglie di Menta',
     price: '€ 11,00',
+    descriptions: {
+      it: 'Bulleit 10 Anni, Sciroppo di Zucchero alla Cannella, Foglie di Menta',
+      en: 'Bulleit 10 Year, Cinnamon Sugar Syrup, Fresh Mint Leaves',
+      es: 'Bulleit 10 Años, Jarabe de Azúcar y Canela, Hojas de Menta Fresca',
+      de: 'Bulleit 10 Jahre, Zimtzuckersirup, Frische Minzblätter',
+      fr: 'Bulleit 10 Ans, Sirop de Sucre à la Cannelle, Feuilles de Menthe Fraîche',
+    },
   },
   {
     name: 'Papa Doble 2°',
-    ingredients: 'Clairin Commun Four, Agrumi Sour Mix, Maraschino',
     price: '€ 9,00',
+    descriptions: {
+      it: 'Clairin Commun Four, Agrumi Sour Mix, Maraschino',
+      en: 'Clairin Commun Four, Citrus Sour Mix, Maraschino',
+      es: 'Clairin Commun Four, Mezcla Agria Cítrica, Maraschino',
+      de: 'Clairin Commun Four, Zitrus-Sour-Mix, Maraschino',
+      fr: 'Clairin Commun Four, Mélange Agrumes Sour, Maraschino',
+    },
   },
   {
     name: 'Canchanchara Moderna',
-    ingredients: 'Hampden 8 Anni, Agrumi Sour Mix, Miele, Top di Tonica',
     price: '€ 10,00',
+    descriptions: {
+      it: 'Hampden 8 Anni, Agrumi Sour Mix, Miele, Top di Tonica',
+      en: 'Hampden 8 Year, Citrus Sour Mix, Honey, Tonic Water',
+      es: 'Hampden 8 Años, Mezcla Agria Cítrica, Miel, Tónica',
+      de: 'Hampden 8 Jahre, Zitrus-Sour-Mix, Honig, Tonic Water',
+      fr: 'Hampden 8 Ans, Mélange Agrumes Sour, Miel, Eau Tonique',
+    },
   },
   {
     name: 'Fruits d\'Amour',
-    ingredients: 'Whisky infuso alla Banana, Sciroppo di Zucchero, Soda',
     price: '€ 9,00',
+    descriptions: {
+      it: 'Whisky infuso alla Banana, Sciroppo di Zucchero, Soda',
+      en: 'Banana-Infused Whisky, Sugar Syrup, Soda Water',
+      es: 'Whisky Macerado en Plátano, Jarabe de Azúcar, Soda',
+      de: 'Bananen-Whisky, Zuckersirup, Sodawasser',
+      fr: 'Whisky Infusé à la Banane, Sirop de Sucre, Soda',
+    },
   },
   {
     name: 'Negroni in Botte',
-    ingredients: 'Negroni invecchiato in botte (almeno 3 mesi)',
     price: '€ 9,00',
+    descriptions: {
+      it: 'Negroni invecchiato in botte (almeno 3 mesi)',
+      en: 'Barrel-aged Negroni (minimum 3 months)',
+      es: 'Negroni Envejecido en Barrica (mínimo 3 meses)',
+      de: 'Fassgelagerter Negroni (mindestens 3 Monate)',
+      fr: 'Negroni Vieilli en Fût (minimum 3 mois)',
+    },
   },
   {
     name: 'ZOE Espresso',
-    ingredients: 'Ciroc Vodka, Liquore al Caffè, Espresso Napoletano alla Nocciola, Sciroppo di Zucchero',
     price: '€ 8,00',
+    descriptions: {
+      it: 'Ciroc Vodka, Liquore al Caffè, Espresso Napoletano alla Nocciola, Sciroppo di Zucchero',
+      en: 'Ciroc Vodka, Coffee Liqueur, Neapolitan Hazelnut Espresso, Sugar Syrup',
+      es: 'Ciroc Vodka, Licor de Café, Espresso Napolitano de Avellana, Jarabe de Azúcar',
+      de: 'Ciroc Vodka, Kaffeelikör, Neapolitanischer Haselnuss-Espresso, Zuckersirup',
+      fr: 'Ciroc Vodka, Liqueur de Café, Espresso Napolitain Noisette, Sirop de Sucre',
+    },
   },
   {
     name: 'Daikiwi',
-    ingredients: 'Rum Barcelon Blanco, Estratto di Kiwi, Sciroppo di Zucchero, Succo di Lime',
     price: '€ 8,00',
+    descriptions: {
+      it: 'Rum Barcelon Blanco, Estratto di Kiwi, Sciroppo di Zucchero, Succo di Lime',
+      en: 'Barcelon Blanco Rum, Kiwi Extract, Sugar Syrup, Lime Juice',
+      es: 'Ron Barcelon Blanco, Extracto de Kiwi, Jarabe de Azúcar, Zumo de Lima',
+      de: 'Barcelon Blanco Rum, Kiwi-Extrakt, Zuckersirup, Limettensaft',
+      fr: 'Rhum Barcelon Blanco, Extrait de Kiwi, Sirop de Sucre, Jus de Citron Vert',
+    },
   },
   {
     name: 'Il Duro',
-    ingredients: 'Rare Breed Kentucky Straight Bourbon Whiskey, Angostura, Zolletta di Zucchero',
     price: '€ 9,00',
+    descriptions: {
+      it: 'Rare Breed Kentucky Straight Bourbon Whiskey, Angostura, Zolletta di Zucchero',
+      en: 'Rare Breed Kentucky Straight Bourbon Whiskey, Angostura Bitters, Sugar Cube',
+      es: 'Rare Breed Kentucky Straight Bourbon, Angostura Bitter, Terrón de Azúcar',
+      de: 'Rare Breed Kentucky Straight Bourbon, Angostura Bitters, Zuckerwürfel',
+      fr: 'Rare Breed Kentucky Straight Bourbon, Angostura Bitters, Morceau de Sucre',
+    },
   },
   {
     name: 'Tokyo Drift',
-    ingredients: 'Ketel One Premium Vodka, Midori, Sciroppo di Zucchero, Estratto di Cetriolo e Mela Verde, Succo di Lime',
     price: '€ 9,00',
+    descriptions: {
+      it: 'Ketel One Premium Vodka, Midori, Sciroppo di Zucchero, Estratto di Cetriolo e Mela Verde, Succo di Lime',
+      en: 'Ketel One Premium Vodka, Midori, Sugar Syrup, Cucumber & Green Apple Extract, Lime Juice',
+      es: 'Ketel One Premium Vodka, Midori, Jarabe de Azúcar, Extracto de Pepino y Manzana Verde, Zumo de Lima',
+      de: 'Ketel One Premium Vodka, Midori, Zuckersirup, Gurken- & Grünapfel-Extrakt, Limettensaft',
+      fr: 'Ketel One Premium Vodka, Midori, Sirop de Sucre, Extrait Concombre & Pomme Verte, Jus de Citron Vert',
+    },
   },
   {
     name: 'Borbone',
-    ingredients: 'J. Walker Double Black Whiskey, Knob Creek Rye, Carpano Antica Formula, Campari Bitter, Angostura',
     price: '€ 9,00',
+    descriptions: {
+      it: 'J. Walker Double Black Whiskey, Knob Creek Rye, Carpano Antica Formula, Campari Bitter, Angostura',
+      en: 'J. Walker Double Black Whiskey, Knob Creek Rye, Carpano Antica Formula, Campari Bitter, Angostura',
+      es: 'J. Walker Double Black Whiskey, Knob Creek Rye, Carpano Antica Formula, Campari Bitter, Angostura',
+      de: 'J. Walker Double Black Whiskey, Knob Creek Rye, Carpano Antica Formula, Campari Bitter, Angostura',
+      fr: 'J. Walker Double Black Whiskey, Knob Creek Rye, Carpano Antica Formula, Campari Bitter, Angostura',
+    },
   },
   {
     name: 'Peach & Love',
-    ingredients: 'Tequila Don Julio Blanco, Peach Cordial, Succo di Lime',
     price: '€ 8,00',
+    descriptions: {
+      it: 'Tequila Don Julio Blanco, Peach Cordial, Succo di Lime',
+      en: 'Don Julio Blanco Tequila, Peach Cordial, Lime Juice',
+      es: 'Tequila Don Julio Blanco, Cordial de Melocotón, Zumo de Lima',
+      de: 'Don Julio Blanco Tequila, Pfirsich-Cordial, Limettensaft',
+      fr: 'Tequila Don Julio Blanco, Cordial de Pêche, Jus de Citron Vert',
+    },
   },
 ];
 
 export const mocktails: SignatureCocktail[] = [
   {
     name: 'Sprizzato',
-    ingredients: 'Sciroppo di Aperol, Tonica Mediterranea, Soda',
     price: '€ 7,00',
+    descriptions: {
+      it: 'Sciroppo di Aperol, Tonica Mediterranea, Soda',
+      en: 'Aperol Syrup, Mediterranean Tonic, Soda Water',
+      es: 'Jarabe de Aperol, Tónica Mediterránea, Soda',
+      de: 'Aperol-Sirup, Mediterrane Tonic, Sodawasser',
+      fr: 'Sirop d\'Aperol, Tonic Méditerranéen, Soda',
+    },
   },
   {
     name: 'Il Conte',
-    ingredients: 'Vibrante Martini, Gin "O" Sabatini, Vermouth Analcolico',
     price: '€ 8,00',
+    descriptions: {
+      it: 'Vibrante Martini, Gin "O" Sabatini, Vermouth Analcolico',
+      en: 'Vibrante Martini, Sabatini "O" Gin (alcohol-free), Non-Alcoholic Vermouth',
+      es: 'Vibrante Martini, Gin "O" Sabatini (sin alcohol), Vermut sin Alcohol',
+      de: 'Vibrante Martini, Sabatini "O" Gin (alkoholfrei), Alkoholfreier Vermouth',
+      fr: 'Vibrante Martini, Gin "O" Sabatini (sans alcool), Vermouth sans Alcool',
+    },
   },
   {
     name: 'Tandem',
-    ingredients: 'Riduzione di Campari Bitter, Succo d\'Arancia, Top di Soda',
     price: '€ 7,00',
+    descriptions: {
+      it: 'Riduzione di Campari Bitter, Succo d\'Arancia, Top di Soda',
+      en: 'Campari Bitter Reduction, Orange Juice, Soda Water',
+      es: 'Reducción de Campari Bitter, Zumo de Naranja, Soda',
+      de: 'Campari-Bitter-Reduktion, Orangensaft, Sodawasser',
+      fr: 'Réduction de Campari Bitter, Jus d\'Orange, Soda',
+    },
   },
   {
     name: 'O\' Re',
-    ingredients: 'Melone Retato, Sciroppo di Zucchero, Succo di Pompelmo',
     price: '€ 7,00',
+    descriptions: {
+      it: 'Melone Retato, Sciroppo di Zucchero, Succo di Pompelmo',
+      en: 'Cantaloupe Melon, Sugar Syrup, Grapefruit Juice',
+      es: 'Melón Cantalupo, Jarabe de Azúcar, Zumo de Pomelo',
+      de: 'Honigmelone, Zuckersirup, Grapefruitsaft',
+      fr: 'Melon Cantaloup, Sirop de Sucre, Jus de Pamplemousse',
+    },
   },
   {
     name: 'Zia Pina',
-    ingredients: 'Estratto di Ananas, Gelato al Cocco, Acqua d\'Ananas',
     price: '€ 7,00',
+    descriptions: {
+      it: 'Estratto di Ananas, Gelato al Cocco, Acqua d\'Ananas',
+      en: 'Pineapple Extract, Coconut Ice Cream, Pineapple Water',
+      es: 'Extracto de Piña, Helado de Coco, Agua de Piña',
+      de: 'Ananas-Extrakt, Kokoseis, Ananaswater',
+      fr: 'Extrait d\'Ananas, Glace à la Noix de Coco, Eau d\'Ananas',
+    },
   },
   {
     name: 'Mulan',
-    ingredients: 'Ginger Beer, Succo di Lime, Menta, Sciroppo allo Zenzero',
     price: '€ 7,00',
+    descriptions: {
+      it: 'Ginger Beer, Succo di Lime, Menta, Sciroppo allo Zenzero',
+      en: 'Ginger Beer, Lime Juice, Fresh Mint, Ginger Syrup',
+      es: 'Ginger Beer, Zumo de Lima, Menta Fresca, Jarabe de Jengibre',
+      de: 'Ginger Beer, Limettensaft, Frische Minze, Ingwersirup',
+      fr: 'Ginger Beer, Jus de Citron Vert, Menthe Fraîche, Sirop de Gingembre',
+    },
   },
   {
     name: 'Pink Lady',
-    ingredients: 'Tonica al Pompelmo Rosa, Marmellata di Arancia, Sciroppo ai Frutti Rossi',
     price: '€ 7,00',
+    descriptions: {
+      it: 'Tonica al Pompelmo Rosa, Marmellata di Arancia, Sciroppo ai Frutti Rossi',
+      en: 'Pink Grapefruit Tonic, Orange Marmalade, Red Fruits Syrup',
+      es: 'Tónica de Pomelo Rosa, Mermelada de Naranja, Jarabe de Frutas Rojas',
+      de: 'Rosa Grapefruit Tonic, Orangenmarmelade, Rote-Früchte-Sirup',
+      fr: 'Tonic au Pamplemousse Rose, Confiture d\'Orange, Sirop aux Fruits Rouges',
+    },
   },
 ];
 
+// ─── SPIRITS ─────────────────────────────────────────────────────
 export const ginTonics: MenuItem[] = [
   { name: 'Gin Tonic base', price: '€ 7,00' },
   { name: 'Portofino', price: '€ 10,00' },
@@ -337,12 +480,7 @@ export const tequilas: MenuItem[] = [
   { name: 'Casamigos', price: '€ 9,00' },
 ];
 
-export interface WineItem {
-  name: string;
-  priceGlass?: string;
-  priceBottle?: string;
-}
-
+// ─── WINE ─────────────────────────────────────────────────────────
 export const redWines: WineItem[] = [
   { name: 'Aglianico Vantanara IGP San Teodoro', priceGlass: '€ 6,00', priceBottle: '€ 22,00' },
   { name: 'Aglianico Fappiano', priceGlass: '€ 6,00', priceBottle: '€ 22,00' },
@@ -353,10 +491,10 @@ export const redWines: WineItem[] = [
   { name: 'Primitivo di Manduria', priceGlass: '€ 6,00', priceBottle: '€ 26,00' },
   { name: 'Chianti C.S. Primo Colle Villa Cerna', priceBottle: '€ 26,00' },
   { name: 'Ciliegiolo Principio IGT Antonio Camillo', priceGlass: '€ 7,00', priceBottle: '€ 28,00' },
-  { name: 'Falerno del Massico, Cantina Papa Conclave', priceBottle: '€ 28,00' },
-  { name: 'Falerno del Massico, Cantina Papa Campantuono', priceBottle: '€ 50,00' },
-  { name: 'Falerno del Massico, Cantina Pagano-Angelus', priceBottle: '€ 40,00' },
-  { name: 'Falerno del Massico, Cantina Pagano-Voluptas', priceBottle: '€ 35,00' },
+  { name: 'Falerno del Massico – Conclave', priceBottle: '€ 28,00' },
+  { name: 'Falerno del Massico – Campantuono', priceBottle: '€ 50,00' },
+  { name: 'Falerno del Massico – Angelus', priceBottle: '€ 40,00' },
+  { name: 'Falerno del Massico – Voluptas', priceBottle: '€ 35,00' },
   { name: 'Aglianico Feudi San Gregorio, Sabbie Nere', priceBottle: '€ 28,00' },
   { name: 'Taurasi Mastro Bernardino Radici', priceBottle: '€ 45,00' },
   { name: 'Taurasi Riserva Due Principati', priceBottle: '€ 40,00' },
@@ -374,7 +512,7 @@ export const redWines: WineItem[] = [
 ];
 
 export const whiteWines: WineItem[] = [
-  { name: 'Falanghina Femmena - Telaro', priceGlass: '€ 6,00', priceBottle: '€ 22,00' },
+  { name: 'Falanghina Femmena – Telaro', priceGlass: '€ 6,00', priceBottle: '€ 22,00' },
   { name: 'Aglianico Rosé Bella Femmena Telaro', priceGlass: '€ 6,00', priceBottle: '€ 22,00' },
   { name: 'Falanghina Vantanara San Teodoro', priceGlass: '€ 6,00', priceBottle: '€ 22,00' },
   { name: 'Greco di Tufo Cutizzi Feudi San Gregorio', priceGlass: '€ 6,00', priceBottle: '€ 26,00' },
@@ -396,7 +534,6 @@ export const whiteWines: WineItem[] = [
 export const sparkling: WineItem[] = [
   { name: 'Prosecco DOCG Varaschin Brut', priceGlass: '€ 5,00', priceBottle: '€ 30,00' },
   { name: 'Prosecco DOCG Varaschin Extra Dry', priceGlass: '€ 5,00', priceBottle: '€ 30,00' },
-  { name: 'Spumante Tefrite Telaro', priceGlass: '€ 5,00', priceBottle: '€ 22,00' },
   { name: 'Ferrari Brut', priceBottle: '€ 35,00' },
   { name: 'Franciacorta Spensierata Brut', priceBottle: '€ 30,00' },
   { name: 'Franciacorta Berlucchi Extra Brut', priceBottle: '€ 45,00' },
@@ -420,6 +557,7 @@ export const sparkling: WineItem[] = [
   { name: 'Perrier-Jouët Belle Époque', priceBottle: '€ 320,00' },
 ];
 
+// ─── COFFEE & DESSERT ─────────────────────────────────────────────
 export const coffees: MenuItem[] = [
   { name: 'Espresso', price: '€ 1,50' },
   { name: 'Espresso Macchiato', price: '€ 1,50' },
@@ -437,10 +575,50 @@ export const coffees: MenuItem[] = [
 ];
 
 export const coffeeSpecials: SignatureCocktail[] = [
-  { name: 'Kinder', ingredients: 'Espresso con gusto Kinder', price: '€ 3,50' },
-  { name: 'Rocher', ingredients: 'Espresso con gusto Rocher', price: '€ 3,50' },
-  { name: 'Raffaello', ingredients: 'Espresso con gusto Raffaello', price: '€ 4,00' },
-  { name: 'Brontese', ingredients: 'Espresso al pistacchio di Bronte', price: '€ 4,00' },
+  {
+    name: 'Kinder',
+    price: '€ 3,50',
+    descriptions: {
+      it: 'Espresso con sciroppo al gusto Kinder',
+      en: 'Espresso with Kinder-flavoured syrup',
+      es: 'Espresso con sirope sabor Kinder',
+      de: 'Espresso mit Kinder-Sirup',
+      fr: 'Espresso au sirop saveur Kinder',
+    },
+  },
+  {
+    name: 'Rocher',
+    price: '€ 3,50',
+    descriptions: {
+      it: 'Espresso con sciroppo al gusto Ferrero Rocher',
+      en: 'Espresso with Ferrero Rocher-flavoured syrup',
+      es: 'Espresso con sirope sabor Ferrero Rocher',
+      de: 'Espresso mit Ferrero Rocher-Sirup',
+      fr: 'Espresso au sirop saveur Ferrero Rocher',
+    },
+  },
+  {
+    name: 'Raffaello',
+    price: '€ 4,00',
+    descriptions: {
+      it: 'Espresso con sciroppo cocco e mandorla',
+      en: 'Espresso with coconut & almond syrup',
+      es: 'Espresso con sirope de coco y almendra',
+      de: 'Espresso mit Kokos- und Mandelsirup',
+      fr: 'Espresso au sirop noix de coco et amande',
+    },
+  },
+  {
+    name: 'Brontese',
+    price: '€ 4,00',
+    descriptions: {
+      it: 'Espresso al pistacchio di Bronte DOP',
+      en: 'Espresso with Bronte DOP pistachio',
+      es: 'Espresso con pistacho de Bronte DOP',
+      de: 'Espresso mit Bronte DOP Pistazie',
+      fr: 'Espresso à la pistache de Bronte DOP',
+    },
+  },
 ];
 
 export const hotChocolates: MenuItem[] = [
@@ -453,23 +631,47 @@ export const hotChocolates: MenuItem[] = [
 export const milkMugs: SignatureCocktail[] = [
   {
     name: 'Leccese',
-    ingredients: 'Fondo cioccolato fondente, espresso, latte di mandorla, panna',
     price: '€ 6,00',
+    descriptions: {
+      it: 'Fondo cioccolato fondente, espresso, latte di mandorla, panna',
+      en: 'Dark chocolate base, espresso, almond milk, whipped cream',
+      es: 'Base de chocolate negro, espresso, leche de almendra, nata',
+      de: 'Zartbitterschokolade-Basis, Espresso, Mandelmilch, Sahne',
+      fr: 'Base chocolat noir, espresso, lait d\'amande, crème fouettée',
+    },
   },
   {
     name: 'Vegan Exotic',
-    ingredients: 'Fondo cioccolato bianco, latte di cocco, ananas sciroppata, passion fruit',
     price: '€ 7,00',
+    descriptions: {
+      it: 'Fondo cioccolato bianco, latte di cocco, ananas sciroppata, passion fruit',
+      en: 'White chocolate base, coconut milk, pineapple in syrup, passion fruit',
+      es: 'Base de chocolate blanco, leche de coco, piña en almíbar, maracuyá',
+      de: 'Weiße Schokoladen-Basis, Kokosmilch, Ananas in Sirup, Passionsfrucht',
+      fr: 'Base chocolat blanc, lait de coco, ananas au sirop, fruit de la passion',
+    },
   },
   {
     name: 'Gran Caramel',
-    ingredients: 'Espresso, latte, sciroppo vaniglia, topping al caramello',
     price: '€ 5,00',
+    descriptions: {
+      it: 'Espresso, latte, sciroppo vaniglia, topping al caramello',
+      en: 'Espresso, milk, vanilla syrup, caramel topping',
+      es: 'Espresso, leche, sirope de vainilla, topping de caramelo',
+      de: 'Espresso, Milch, Vanillesirup, Karamell-Topping',
+      fr: 'Espresso, lait, sirop vanille, topping caramel',
+    },
   },
   {
     name: 'Mocha',
-    ingredients: 'Espresso, latte, cioccolato al latte, panna montata',
     price: '€ 5,00',
+    descriptions: {
+      it: 'Espresso, latte, cioccolato al latte, panna montata',
+      en: 'Espresso, milk, milk chocolate, whipped cream',
+      es: 'Espresso, leche, chocolate con leche, nata montada',
+      de: 'Espresso, Milch, Milchschokolade, Schlagsahne',
+      fr: 'Espresso, lait, chocolat au lait, crème fouettée',
+    },
   },
 ];
 
@@ -484,12 +686,13 @@ export const desserts: MenuItem[] = [
 ];
 
 export const fruits: MenuItem[] = [
-  { name: 'Tagliata 2 Pax', price: '€ 14,00' },
-  { name: 'Tagliata 4 Pax', price: '€ 25,00' },
+  { name: 'Tagliata di Frutta 2 Pax', price: '€ 14,00' },
+  { name: 'Tagliata di Frutta 4 Pax', price: '€ 25,00' },
   { name: 'Tagliata di Frutta', price: '€ 8,00' },
   { name: 'Tagliata di Stagione', price: '€ 6,00' },
 ];
 
+// ─── FOOD ─────────────────────────────────────────────────────────
 export const snacks: MenuItem[] = [
   { name: 'Patatine Fritte Cheddar + Bacon', price: '€ 6,00' },
   { name: 'Patatine Fritte', price: '€ 5,00' },
@@ -501,27 +704,157 @@ export const snacks: MenuItem[] = [
 ];
 
 export const bruschette: SignatureCocktail[] = [
-  { name: 'Classica', ingredients: 'Pomodoro, aglio, olio', price: '€ 4,00' },
-  { name: 'Guanciale e Noci', ingredients: 'Guanciale croccante, noci', price: '€ 5,00' },
-  { name: 'Pesto di Pistacchio e Pomodoro Secco', ingredients: 'Pesto di pistacchio, pomodoro secco', price: '€ 5,00' },
-  { name: 'Broccoli, Salsiccia e Provola', ingredients: 'Broccoli saltati, salsiccia, provola', price: '€ 5,00' },
-  { name: 'Spuma di Mozzarella e Prosciutto Crudo Essiccato', ingredients: 'Spuma di mozzarella, prosciutto crudo', price: '€ 6,00' },
-  { name: 'Bruschetta Fritta, Provola di Bufala e Croccante di Pancetta', ingredients: 'Bruschetta fritta, provola di bufala, pancetta croccante', price: '€ 6,00' },
-  { name: 'Bruschetta Fritta, Ricotta di Bufala, Cipolla Caramellata e Croccante di Pancetta', ingredients: 'Bruschetta fritta, ricotta di bufala, cipolla caramellata, pancetta', price: '€ 6,00' },
-  { name: 'Bruschette Mix 4 pz.', ingredients: 'Selezione di 4 bruschette', price: '€ 8,00' },
+  {
+    name: 'Classica',
+    price: '€ 4,00',
+    descriptions: {
+      it: 'Pomodoro, aglio, olio EVO, basilico',
+      en: 'Tomato, garlic, extra-virgin olive oil, basil',
+      es: 'Tomate, ajo, aceite de oliva virgen extra, albahaca',
+      de: 'Tomate, Knoblauch, natives Olivenöl, Basilikum',
+      fr: 'Tomate, ail, huile d\'olive vierge extra, basilic',
+    },
+  },
+  {
+    name: 'Guanciale e Noci',
+    price: '€ 5,00',
+    descriptions: {
+      it: 'Guanciale croccante, noci',
+      en: 'Crispy guanciale (cured pork cheek), walnuts',
+      es: 'Guanciale crujiente, nueces',
+      de: 'Knuspriger Guanciale (Schweinebacke), Walnüsse',
+      fr: 'Guanciale croustillant, noix',
+    },
+  },
+  {
+    name: 'Pesto di Pistacchio e Pomodoro Secco',
+    price: '€ 5,00',
+    descriptions: {
+      it: 'Pesto di pistacchio, pomodoro secco',
+      en: 'Pistachio pesto, sun-dried tomato',
+      es: 'Pesto de pistacho, tomate seco',
+      de: 'Pistazien-Pesto, getrocknete Tomate',
+      fr: 'Pesto de pistache, tomate séchée',
+    },
+  },
+  {
+    name: 'Broccoli, Salsiccia e Provola',
+    price: '€ 5,00',
+    descriptions: {
+      it: 'Broccoli saltati, salsiccia, provola affumicata',
+      en: 'Sautéed broccoli, sausage, smoked provola cheese',
+      es: 'Brócoli salteado, salchicha, queso provola ahumado',
+      de: 'Angebratener Brokkoli, Wurst, geräucherter Provola-Käse',
+      fr: 'Brocolis sautés, saucisse, fromage provola fumé',
+    },
+  },
+  {
+    name: 'Spuma di Mozzarella e Prosciutto Crudo Essiccato',
+    price: '€ 6,00',
+    descriptions: {
+      it: 'Mousse di mozzarella, prosciutto crudo essiccato',
+      en: 'Mozzarella mousse, aged dry-cured ham',
+      es: 'Mousse de mozzarella, jamón crudo curado',
+      de: 'Mozzarella-Mousse, luftgetrockneter Rohschinken',
+      fr: 'Mousse de mozzarella, jambon cru séché',
+    },
+  },
+  {
+    name: 'Bruschetta Fritta con Provola di Bufala e Croccante di Pancetta',
+    price: '€ 6,00',
+    descriptions: {
+      it: 'Bruschetta fritta, provola di bufala, pancetta croccante',
+      en: 'Fried bruschetta, buffalo provola cheese, crispy bacon',
+      es: 'Bruschetta frita, queso provola de búfala, bacon crujiente',
+      de: 'Gebratene Bruschetta, Büffel-Provola-Käse, knuspiger Speck',
+      fr: 'Bruschetta frite, provola de bufflonne, lard croustillant',
+    },
+  },
+  {
+    name: 'Bruschetta Fritta con Ricotta di Bufala, Cipolla Caramellata e Pancetta',
+    price: '€ 6,00',
+    descriptions: {
+      it: 'Bruschetta fritta, ricotta di bufala, cipolla caramellata, pancetta croccante',
+      en: 'Fried bruschetta, buffalo ricotta, caramelised onion, crispy bacon',
+      es: 'Bruschetta frita, ricotta de búfala, cebolla caramelizada, bacon crujiente',
+      de: 'Gebratene Bruschetta, Büffel-Ricotta, karamellisierte Zwiebel, Speck',
+      fr: 'Bruschetta frite, ricotta de bufflonne, oignon caramélisé, lard croustillant',
+    },
+  },
+  {
+    name: 'Bruschette Mix 4 pz.',
+    price: '€ 8,00',
+    descriptions: {
+      it: 'Selezione di 4 bruschette dello chef',
+      en: 'Chef\'s selection of 4 bruschette',
+      es: 'Selección del chef de 4 bruschettas',
+      de: 'Chef-Auswahl von 4 Bruschette',
+      fr: 'Sélection du chef de 4 bruschette',
+    },
+  },
 ];
 
 export const pinse: SignatureCocktail[] = [
-  { name: 'Margherita', ingredients: '', price: '€ 6,00' },
-  { name: 'La Fresca', ingredients: 'Crudo, Rucola, Parmigiano, Pomodorini, Aceto Balsamico', price: '€ 8,00' },
-  { name: 'Mortazza', ingredients: 'Mortadella, Stracciatella di Bufala, Pistacchio', price: '€ 8,00' },
-  { name: 'Conciata Male', ingredients: 'Guanciale di maialino nero, Pecorino Toscano conciato, Pomodori secchi, Nocciole', price: '€ 12,00' },
-  { name: 'Vegana', ingredients: 'Pesto di pistacchio, Zucchine fritte, Melanzane arrostite, Rucola, Noci', price: '€ 10,00' },
+  {
+    name: 'Margherita',
+    price: '€ 6,00',
+    descriptions: {
+      it: 'Pomodoro, mozzarella, basilico',
+      en: 'Tomato, mozzarella, basil',
+      es: 'Tomate, mozzarella, albahaca',
+      de: 'Tomate, Mozzarella, Basilikum',
+      fr: 'Tomate, mozzarella, basilic',
+    },
+  },
+  {
+    name: 'La Fresca',
+    price: '€ 8,00',
+    descriptions: {
+      it: 'Prosciutto crudo, rucola, parmigiano, pomodorini, aceto balsamico',
+      en: 'Cured ham, rocket, parmesan, cherry tomatoes, balsamic vinegar',
+      es: 'Jamón crudo, rúcula, parmesano, tomates cherry, vinagre balsámico',
+      de: 'Rohschinken, Rucola, Parmesan, Kirschtomaten, Balsamico-Essig',
+      fr: 'Jambon cru, roquette, parmesan, tomates cerises, vinaigre balsamique',
+    },
+  },
+  {
+    name: 'Mortazza',
+    price: '€ 8,00',
+    descriptions: {
+      it: 'Mortadella, stracciatella di bufala, pistacchio',
+      en: 'Mortadella, buffalo stracciatella cheese, pistachio',
+      es: 'Mortadela, stracciatella de búfala, pistacho',
+      de: 'Mortadella, Büffel-Stracciatella-Käse, Pistazie',
+      fr: 'Mortadelle, stracciatella de bufflonne, pistache',
+    },
+  },
+  {
+    name: 'Conciata Male',
+    price: '€ 12,00',
+    descriptions: {
+      it: 'Guanciale di maialino nero, pecorino toscano conciato, pomodori secchi, nocciole',
+      en: 'Black piglet guanciale, seasoned Tuscan pecorino, sun-dried tomatoes, hazelnuts',
+      es: 'Guanciale de cerdo negro, pecorino toscano curado, tomates secos, avellanas',
+      de: 'Schwarzferkel-Guanciale, gereifter toskanischer Pecorino, getrocknete Tomaten, Haselnüsse',
+      fr: 'Guanciale de cochon noir, pecorino toscan affiné, tomates séchées, noisettes',
+    },
+  },
+  {
+    name: 'Vegana',
+    price: '€ 10,00',
+    descriptions: {
+      it: 'Pesto di pistacchio, zucchine fritte, melanzane arrostite, rucola, noci',
+      en: 'Pistachio pesto, fried courgette, roasted aubergine, rocket, walnuts',
+      es: 'Pesto de pistacho, calabacín frito, berenjena asada, rúcula, nueces',
+      de: 'Pistazien-Pesto, gebratene Zucchini, geröstete Aubergine, Rucola, Walnüsse',
+      fr: 'Pesto de pistache, courgette frite, aubergine rôtie, roquette, noix',
+    },
+  },
 ];
 
 export const taglieri: MenuItem[] = [
   { name: 'Salumi – Selezione della Casa', price: '€ 12,00' },
   { name: 'Formaggi – Selezione della Casa', price: '€ 14,00' },
   { name: 'Mix (consigliato per 2 persone)', price: '€ 18,00' },
-  { name: 'Mix + Sfizi del Giorno (consigliato per 2 persone)', price: '€ 26,00' },
+  { name: 'Mix + Sfizi del Giorno (per 2 persone)', price: '€ 26,00' },
 ];
