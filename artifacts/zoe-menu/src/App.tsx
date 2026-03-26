@@ -200,70 +200,74 @@ function LangPicker({ lang, setLang }: { lang: Language; setLang: (l: Language) 
 // ─── MAIN APP ────────────────────────────────────────────────────
 type MainCat = 'bar' | 'cocktails' | 'spirits' | 'wine' | 'food' | 'coffee';
 
-const iconProps = {
-  width: 28, height: 28, viewBox: '0 0 32 32', fill: 'none',
-  stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
+const ip = {
+  width: 32, height: 32, viewBox: '0 0 32 32', fill: 'none',
+  stroke: 'white', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
 };
+const wf = 'rgba(255,255,255,0.08)'; // subtle white fill
 
-// Bar — martini glass
+// Bar — martini glass (geometric, with olive)
 const BarIcon = () => (
-  <svg {...iconProps}>
-    <line x1="5" y1="7" x2="27" y2="7" />
-    <line x1="5" y1="7" x2="16" y2="21" />
-    <line x1="27" y1="7" x2="16" y2="21" />
-    <line x1="16" y1="21" x2="16" y2="27" />
-    <line x1="11" y1="27" x2="21" y2="27" />
-  </svg>
-);
-
-// Cocktails — coupe glass
-const CocktailsIcon = () => (
-  <svg {...iconProps}>
-    <line x1="6" y1="8" x2="26" y2="8" />
-    <path d="M6 8 Q6 20 16 20 Q26 20 26 8" />
-    <line x1="16" y1="20" x2="16" y2="27" />
-    <line x1="11" y1="27" x2="21" y2="27" />
-  </svg>
-);
-
-// Spirits — whiskey tumbler
-const SpiritsIcon = () => (
-  <svg {...iconProps}>
-    <path d="M7 9 L8 26 L24 26 L25 9 Z" />
-    <line x1="8" y1="17" x2="24" y2="17" />
-  </svg>
-);
-
-// Wine — wine glass
-const WineIcon = () => (
-  <svg {...iconProps}>
-    <line x1="10" y1="6" x2="22" y2="6" />
-    <path d="M10 6 Q8 16 16 22 Q24 16 22 6" />
-    <line x1="16" y1="22" x2="16" y2="28" />
+  <svg {...ip}>
+    <polygon points="4,6 28,6 16,21" fill={wf} stroke="white" strokeWidth="2" />
+    <line x1="16" y1="21" x2="16" y2="28" />
     <line x1="11" y1="28" x2="21" y2="28" />
+    <circle cx="16" cy="10" r="1.5" fill="white" stroke="none" />
   </svg>
 );
 
-// Food — fork and knife
+// Cocktails — champagne flute (bubbles inside)
+const CocktailsIcon = () => (
+  <svg {...ip}>
+    <path d="M12 4 L11 22 Q11 27 16 27 Q21 27 21 22 L20 4 Z" fill={wf} />
+    <line x1="16" y1="27" x2="16" y2="30" />
+    <line x1="13" y1="30" x2="19" y2="30" />
+    <circle cx="16" cy="19" r="1" fill="white" stroke="none" />
+    <circle cx="14" cy="13" r="0.8" fill="white" stroke="none" />
+    <circle cx="18" cy="9" r="0.8" fill="white" stroke="none" />
+  </svg>
+);
+
+// Spirits — whiskey bottle (with label band)
+const SpiritsIcon = () => (
+  <svg {...ip}>
+    <path d="M13 13 L11 27 Q11 29 13 29 L19 29 Q21 29 21 27 L19 13 Z" fill={wf} />
+    <path d="M13 13 L13 8 Q13 6 14 5 L18 5 Q19 6 19 8 L19 13" />
+    <line x1="11" y1="21" x2="21" y2="21" />
+    <line x1="14" y1="5" x2="18" y2="5" />
+  </svg>
+);
+
+// Wine — wine glass with liquid fill
+const WineIcon = () => (
+  <svg {...ip}>
+    <path d="M8 5 Q6 17 16 22 Q26 17 24 5" fill={wf} />
+    <line x1="8" y1="5" x2="24" y2="5" />
+    <path d="M10 15 Q10 22 16 22 Q22 22 22 15" fill={wf} />
+    <line x1="16" y1="22" x2="16" y2="29" />
+    <line x1="11" y1="29" x2="21" y2="29" />
+  </svg>
+);
+
+// Food — restaurant cloche (dome cover)
 const FoodIcon = () => (
-  <svg {...iconProps}>
-    <line x1="9" y1="5" x2="9" y2="27" />
-    <line x1="6" y1="5" x2="6" y2="12" />
-    <line x1="12" y1="5" x2="12" y2="12" />
-    <path d="M6 12 Q9 16 12 12" />
-    <line x1="23" y1="5" x2="23" y2="27" />
-    <path d="M23 5 Q27 10 23 16" />
+  <svg {...ip}>
+    <path d="M3 21 Q3 7 16 7 Q29 7 29 21" fill={wf} />
+    <line x1="3" y1="21" x2="29" y2="21" />
+    <line x1="1" y1="25" x2="31" y2="25" />
+    <line x1="16" y1="7" x2="16" y2="4" />
+    <circle cx="16" cy="3" r="2" fill="white" stroke="none" />
   </svg>
 );
 
-// Coffee — espresso cup
+// Coffee — espresso cup with saucer and steam
 const CoffeeIcon = () => (
-  <svg {...iconProps}>
-    <path d="M8 15 L9 25 Q9 27 11 27 L21 27 Q23 27 23 25 L24 15 Z" />
-    <path d="M24 18 Q29 18 29 22 Q29 26 24 26" />
-    <path d="M5 28 Q16 31 27 28" />
-    <path d="M13 12 Q14 9 13 7" />
-    <path d="M19 12 Q20 9 19 7" />
+  <svg {...ip}>
+    <path d="M7 16 L8 25 Q8 28 11 28 L21 28 Q24 28 24 25 L25 16 Z" fill={wf} />
+    <path d="M24 19 Q29 19 29 22 Q29 26 24 26" />
+    <ellipse cx="16" cy="30" rx="11" ry="2" />
+    <path d="M12 13 Q13.5 10 12 7" />
+    <path d="M20 13 Q21.5 10 20 7" />
   </svg>
 );
 

@@ -133,7 +133,9 @@ body {
   border-bottom: 2px solid var(--gold);
 }
 .cat-btn:hover:not(.active) { background: rgba(244,241,236,0.06); }
-.cat-icon { font-size: 1.5rem; line-height: 1; }
+.cat-icon { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; opacity: 0.75; transition: opacity 0.2s; }
+.cat-btn.active .cat-icon { opacity: 1; }
+.cat-btn:hover:not(.active) .cat-icon { opacity: 0.9; }
 .cat-label {
   font-size: 0.62rem;
   letter-spacing: 0.12em;
