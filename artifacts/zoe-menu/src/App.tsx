@@ -562,7 +562,6 @@ export default function App() {
             </div>
           ))}
         </div>
-        <p className="small-note" style={{ color: 'rgba(244,241,236,0.35)', marginBottom: '1.5rem' }}>{t.tableService}</p>
 
         <hr className="footer-rule" />
 
