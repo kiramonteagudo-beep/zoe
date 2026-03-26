@@ -353,7 +353,7 @@ export const mocktails: SignatureCocktail[] = [
 export const ginTonics: MenuItem[] = [
   { name: 'Gin Tonic base', price: '€ 7,00' },
   { name: 'Portofino', price: '€ 10,00' },
-  { name: 'Poku', price: '€ 10,00' },
+  { name: 'Roku', price: '€ 10,00' },
   { name: 'Adamus', price: '€ 13,00' },
   { name: 'Aviation', price: '€ 8,00' },
   { name: 'Bombay', price: '€ 8,00' },
@@ -579,44 +579,44 @@ export const coffeeSpecials: SignatureCocktail[] = [
     name: 'Kinder',
     price: '€ 3,50',
     descriptions: {
-      it: 'Espresso con sciroppo al gusto Kinder',
-      en: 'Espresso with Kinder-flavoured syrup',
-      es: 'Espresso con sirope sabor Kinder',
-      de: 'Espresso mit Kinder-Sirup',
-      fr: 'Espresso au sirop saveur Kinder',
+      it: 'Crema caffè, Nutella, cioccolato bianco e panna',
+      en: 'Coffee cream, Nutella, white chocolate and cream',
+      es: 'Crema de café, Nutella, chocolate blanco y nata',
+      de: 'Kaffee-Creme, Nutella, weiße Schokolade und Sahne',
+      fr: 'Crème café, Nutella, chocolat blanc et crème',
     },
   },
   {
     name: 'Rocher',
     price: '€ 3,50',
     descriptions: {
-      it: 'Espresso con sciroppo al gusto Ferrero Rocher',
-      en: 'Espresso with Ferrero Rocher-flavoured syrup',
-      es: 'Espresso con sirope sabor Ferrero Rocher',
-      de: 'Espresso mit Ferrero Rocher-Sirup',
-      fr: 'Espresso au sirop saveur Ferrero Rocher',
+      it: 'Crema caffè, Nutella, granella di nocciole e panna',
+      en: 'Coffee cream, Nutella, chopped hazelnuts and cream',
+      es: 'Crema de café, Nutella, granillo de avellanas y nata',
+      de: 'Kaffee-Creme, Nutella, gehackte Haselnüsse und Sahne',
+      fr: 'Crème café, Nutella, éclats de noisettes et crème',
     },
   },
   {
     name: 'Raffaello',
     price: '€ 4,00',
     descriptions: {
-      it: 'Espresso con sciroppo cocco e mandorla',
-      en: 'Espresso with coconut & almond syrup',
-      es: 'Espresso con sirope de coco y almendra',
-      de: 'Espresso mit Kokos- und Mandelsirup',
-      fr: 'Espresso au sirop noix de coco et amande',
+      it: 'Crema caffè, cioccolato bianco, granella di cocco e panna',
+      en: 'Coffee cream, white chocolate, shredded coconut and cream',
+      es: 'Crema de café, chocolate blanco, coco rallado y nata',
+      de: 'Kaffee-Creme, weiße Schokolade, Kokosraspeln und Sahne',
+      fr: 'Crème café, chocolat blanc, noix de coco râpée et crème',
     },
   },
   {
     name: 'Brontese',
     price: '€ 4,00',
     descriptions: {
-      it: 'Espresso al pistacchio di Bronte DOP',
-      en: 'Espresso with Bronte DOP pistachio',
-      es: 'Espresso con pistacho de Bronte DOP',
-      de: 'Espresso mit Bronte DOP Pistazie',
-      fr: 'Espresso à la pistache de Bronte DOP',
+      it: 'Crema caffè, crema di pistacchio, granella di pistacchio e panna',
+      en: 'Coffee cream, pistachio cream, chopped pistachios and cream',
+      es: 'Crema de café, crema de pistacho, granillo de pistacho y nata',
+      de: 'Kaffee-Creme, Pistaziencreme, gehackte Pistazien und Sahne',
+      fr: 'Crème café, crème de pistache, éclats de pistaches et crème',
     },
   },
 ];
@@ -703,95 +703,15 @@ export const snacks: MenuItem[] = [
   { name: 'Montanara a Modo Mio', price: '€ 7,00' },
 ];
 
-export const bruschette: SignatureCocktail[] = [
-  {
-    name: 'Classica',
-    price: '€ 4,00',
-    descriptions: {
-      it: 'Pomodoro, aglio, olio EVO, basilico',
-      en: 'Tomato, garlic, extra-virgin olive oil, basil',
-      es: 'Tomate, ajo, aceite de oliva virgen extra, albahaca',
-      de: 'Tomate, Knoblauch, natives Olivenöl, Basilikum',
-      fr: 'Tomate, ail, huile d\'olive vierge extra, basilic',
-    },
-  },
-  {
-    name: 'Guanciale e Noci',
-    price: '€ 5,00',
-    descriptions: {
-      it: 'Guanciale croccante, noci',
-      en: 'Crispy guanciale (cured pork cheek), walnuts',
-      es: 'Guanciale crujiente, nueces',
-      de: 'Knuspriger Guanciale (Schweinebacke), Walnüsse',
-      fr: 'Guanciale croustillant, noix',
-    },
-  },
-  {
-    name: 'Pesto di Pistacchio e Pomodoro Secco',
-    price: '€ 5,00',
-    descriptions: {
-      it: 'Pesto di pistacchio, pomodoro secco',
-      en: 'Pistachio pesto, sun-dried tomato',
-      es: 'Pesto de pistacho, tomate seco',
-      de: 'Pistazien-Pesto, getrocknete Tomate',
-      fr: 'Pesto de pistache, tomate séchée',
-    },
-  },
-  {
-    name: 'Broccoli, Salsiccia e Provola',
-    price: '€ 5,00',
-    descriptions: {
-      it: 'Broccoli saltati, salsiccia, provola affumicata',
-      en: 'Sautéed broccoli, sausage, smoked provola cheese',
-      es: 'Brócoli salteado, salchicha, queso provola ahumado',
-      de: 'Angebratener Brokkoli, Wurst, geräucherter Provola-Käse',
-      fr: 'Brocolis sautés, saucisse, fromage provola fumé',
-    },
-  },
-  {
-    name: 'Spuma di Mozzarella e Prosciutto Crudo Essiccato',
-    price: '€ 6,00',
-    descriptions: {
-      it: 'Mousse di mozzarella, prosciutto crudo essiccato',
-      en: 'Mozzarella mousse, aged dry-cured ham',
-      es: 'Mousse de mozzarella, jamón crudo curado',
-      de: 'Mozzarella-Mousse, luftgetrockneter Rohschinken',
-      fr: 'Mousse de mozzarella, jambon cru séché',
-    },
-  },
-  {
-    name: 'Bruschetta Fritta con Provola di Bufala e Croccante di Pancetta',
-    price: '€ 6,00',
-    descriptions: {
-      it: 'Bruschetta fritta, provola di bufala, pancetta croccante',
-      en: 'Fried bruschetta, buffalo provola cheese, crispy bacon',
-      es: 'Bruschetta frita, queso provola de búfala, bacon crujiente',
-      de: 'Gebratene Bruschetta, Büffel-Provola-Käse, knuspiger Speck',
-      fr: 'Bruschetta frite, provola de bufflonne, lard croustillant',
-    },
-  },
-  {
-    name: 'Bruschetta Fritta con Ricotta di Bufala, Cipolla Caramellata e Pancetta',
-    price: '€ 6,00',
-    descriptions: {
-      it: 'Bruschetta fritta, ricotta di bufala, cipolla caramellata, pancetta croccante',
-      en: 'Fried bruschetta, buffalo ricotta, caramelised onion, crispy bacon',
-      es: 'Bruschetta frita, ricotta de búfala, cebolla caramelizada, bacon crujiente',
-      de: 'Gebratene Bruschetta, Büffel-Ricotta, karamellisierte Zwiebel, Speck',
-      fr: 'Bruschetta frite, ricotta de bufflonne, oignon caramélisé, lard croustillant',
-    },
-  },
-  {
-    name: 'Bruschette Mix 4 pz.',
-    price: '€ 8,00',
-    descriptions: {
-      it: 'Selezione di 4 bruschette dello chef',
-      en: 'Chef\'s selection of 4 bruschette',
-      es: 'Selección del chef de 4 bruschettas',
-      de: 'Chef-Auswahl von 4 Bruschette',
-      fr: 'Sélection du chef de 4 bruschette',
-    },
-  },
+export const bruschette: MenuItem[] = [
+  { name: 'Classica', price: '€ 4,00' },
+  { name: 'Guanciale e Noci', price: '€ 5,00' },
+  { name: 'Pesto di Pistacchio e Pomodoro Secco', price: '€ 5,00' },
+  { name: 'Broccoli, Salsiccia e Provola', price: '€ 5,00' },
+  { name: 'Spuma di Mozzarella e Prosciutto Crudo Essiccato', price: '€ 6,00' },
+  { name: 'Bruschetta Fritta con Provola di Bufala e Croccante di Pancetta', price: '€ 6,00' },
+  { name: 'Bruschetta Fritta con Ricotta di Bufala, Cipolla Caramellata e Pancetta', price: '€ 6,00' },
+  { name: 'Bruschette Mix 4 pz.', price: '€ 8,00', note: 'Selezione dello Chef' },
 ];
 
 export const pinse: SignatureCocktail[] = [

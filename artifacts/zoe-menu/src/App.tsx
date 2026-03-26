@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Language, langLabels, translations, Translation } from './data/translations';
+import { Language, visibleLanguages, langLabels, translations, Translation } from './data/translations';
 import {
   softDrinks, beers, craftBeers, draftBeers, aperitifs, amari,
   signatureCocktails, mocktails,
@@ -37,50 +37,56 @@ function ServingModal({ data, t, onClose }: { data: ModalData; t: Translation; o
   );
 }
 
-// ─── ITEM ROW ────────────────────────────────────────────────────
+// ─── INFO ICON SVG ───────────────────────────────────────────────
+function InfoIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="8" x2="12" y2="12" />
+      <line x1="12" y1="16" x2="12.01" y2="16" />
+    </svg>
+  );
+}
+
+// ─── ITEM ROW (info icon on LEFT) ────────────────────────────────
 function ItemRow({ item, onInfo }: { item: MenuItem; onInfo?: () => void }) {
   return (
     <div className="item-row">
+      {onInfo ? (
+        <button className="info-btn" onClick={onInfo} title="Come si serve" aria-label="Info">
+          <InfoIcon />
+        </button>
+      ) : (
+        <div className="info-spacer" />
+      )}
       <div className="item-left">
         <span className="item-name">{item.name}</span>
         {item.note && <span className="item-badge">{item.note}</span>}
       </div>
       <div className="item-right">
         {item.price && <span className="item-price">{item.price}</span>}
-        {onInfo && (
-          <button className="info-btn" onClick={onInfo} title="Come si serve">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="12" y1="8" x2="12" y2="12" />
-              <line x1="12" y1="16" x2="12.01" y2="16" />
-            </svg>
-          </button>
-        )}
       </div>
     </div>
   );
 }
 
-// ─── SIGNATURE CARD ──────────────────────────────────────────────
+// ─── SIGNATURE CARD (info icon on LEFT) ──────────────────────────
 function SigCard({ item, lang, onInfo }: { item: SignatureCocktail; lang: Language; onInfo?: () => void }) {
   const desc = item.descriptions[lang];
   return (
     <div className="sig-card">
+      {onInfo ? (
+        <button className="info-btn sig-info-btn" onClick={onInfo} title="Come si serve" aria-label="Info">
+          <InfoIcon />
+        </button>
+      ) : (
+        <div className="info-spacer" />
+      )}
       <div className="sig-body">
         <div className="sig-name">{item.name}</div>
         {desc && <div className="sig-ingredients">{desc}</div>}
       </div>
-      <div className="sig-foot">
-        <span className="sig-price">{item.price}</span>
-        {onInfo && (
-          <button className="info-btn" onClick={onInfo} title="Come si serve">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
-          </button>
-        )}
-      </div>
+      <span className="sig-price">{item.price}</span>
     </div>
   );
 }
@@ -311,7 +317,7 @@ export default function App() {
         <>
           <SecHeader title={t.sub_bruschette} note="2 pezzi" />
           {bruschette.map((i) => (
-            <SigCard key={i.name} item={i} lang={lang} onInfo={() => openModal({ name: i.name, description: i.descriptions[lang] })} />
+            <ItemRow key={i.name} item={i} onInfo={() => openModal({ name: i.name })} />
           ))}
         </>
       );
@@ -326,6 +332,7 @@ export default function App() {
       if (currentSub === 'taglieri') return (
         <>
           <SecHeader title={t.sub_taglieri} />
+          <p className="taglieri-note">{t.taiglieriNote}</p>
           {taglieri.map((i) => <ItemRow key={i.name} item={i} />)}
         </>
       );
@@ -341,9 +348,14 @@ export default function App() {
       };
       const secTitle = subTabsMap.coffee.find((s) => s.key === currentSub)?.label || '';
 
+      const coffeeNote = (
+        <p className="coffee-hours-note">{t.coffeeHoursNote}</p>
+      );
+
       if (sigLists[currentSub]) {
         return (
           <>
+            {coffeeNote}
             <SecHeader title={secTitle} />
             {sigLists[currentSub].map((i) => (
               <SigCard key={i.name} item={i} lang={lang} onInfo={() => openModal({ name: i.name, description: i.descriptions[lang] })} />
@@ -353,6 +365,7 @@ export default function App() {
       }
       return (
         <>
+          {coffeeNote}
           <SecHeader title={secTitle} />
           {(lists[currentSub] || []).map((i) => <ItemRow key={i.name} item={i} onInfo={() => openModal({ name: i.name })} />)}
         </>
@@ -381,8 +394,9 @@ export default function App() {
 
       {/* HEADER */}
       <div className="header">
+        <div className="header-bg" />
         <div className="lang-bar">
-          {(Object.keys(langLabels) as Language[]).map((l) => (
+          {visibleLanguages.map((l) => (
             <button
               key={l}
               className={`lang-btn ${lang === l ? 'active' : ''}`}
@@ -433,7 +447,7 @@ export default function App() {
             </div>
           ))}
         </div>
-        <p className="small-note" style={{ color: '#555', marginBottom: '1.5rem' }}>{t.tableService}</p>
+        <p className="small-note" style={{ color: 'rgba(244,241,236,0.35)', marginBottom: '1.5rem' }}>{t.tableService}</p>
 
         <hr className="footer-rule" />
 
