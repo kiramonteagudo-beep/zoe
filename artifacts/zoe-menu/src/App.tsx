@@ -200,13 +200,80 @@ function LangPicker({ lang, setLang }: { lang: Language; setLang: (l: Language) 
 // ─── MAIN APP ────────────────────────────────────────────────────
 type MainCat = 'bar' | 'cocktails' | 'spirits' | 'wine' | 'food' | 'coffee';
 
+const iconProps = {
+  width: 28, height: 28, viewBox: '0 0 32 32', fill: 'none',
+  stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
+};
+
+// Bar — martini glass
+const BarIcon = () => (
+  <svg {...iconProps}>
+    <line x1="5" y1="7" x2="27" y2="7" />
+    <line x1="5" y1="7" x2="16" y2="21" />
+    <line x1="27" y1="7" x2="16" y2="21" />
+    <line x1="16" y1="21" x2="16" y2="27" />
+    <line x1="11" y1="27" x2="21" y2="27" />
+  </svg>
+);
+
+// Cocktails — coupe glass
+const CocktailsIcon = () => (
+  <svg {...iconProps}>
+    <line x1="6" y1="8" x2="26" y2="8" />
+    <path d="M6 8 Q6 20 16 20 Q26 20 26 8" />
+    <line x1="16" y1="20" x2="16" y2="27" />
+    <line x1="11" y1="27" x2="21" y2="27" />
+  </svg>
+);
+
+// Spirits — whiskey tumbler
+const SpiritsIcon = () => (
+  <svg {...iconProps}>
+    <path d="M7 9 L8 26 L24 26 L25 9 Z" />
+    <line x1="8" y1="17" x2="24" y2="17" />
+  </svg>
+);
+
+// Wine — wine glass
+const WineIcon = () => (
+  <svg {...iconProps}>
+    <line x1="10" y1="6" x2="22" y2="6" />
+    <path d="M10 6 Q8 16 16 22 Q24 16 22 6" />
+    <line x1="16" y1="22" x2="16" y2="28" />
+    <line x1="11" y1="28" x2="21" y2="28" />
+  </svg>
+);
+
+// Food — fork and knife
+const FoodIcon = () => (
+  <svg {...iconProps}>
+    <line x1="9" y1="5" x2="9" y2="27" />
+    <line x1="6" y1="5" x2="6" y2="12" />
+    <line x1="12" y1="5" x2="12" y2="12" />
+    <path d="M6 12 Q9 16 12 12" />
+    <line x1="23" y1="5" x2="23" y2="27" />
+    <path d="M23 5 Q27 10 23 16" />
+  </svg>
+);
+
+// Coffee — espresso cup
+const CoffeeIcon = () => (
+  <svg {...iconProps}>
+    <path d="M8 15 L9 25 Q9 27 11 27 L21 27 Q23 27 23 25 L24 15 Z" />
+    <path d="M24 18 Q29 18 29 22 Q29 26 24 26" />
+    <path d="M5 28 Q16 31 27 28" />
+    <path d="M13 12 Q14 9 13 7" />
+    <path d="M19 12 Q20 9 19 7" />
+  </svg>
+);
+
 const CATS: { id: MainCat; icon: React.ReactNode; labelKey: keyof Translation }[] = [
-  { id: 'bar',      icon: '🍸', labelKey: 'cat_bar' },
-  { id: 'cocktails', icon: '🍹', labelKey: 'cat_cocktails' },
-  { id: 'spirits',  icon: '🥃', labelKey: 'cat_spirits' },
-  { id: 'wine',     icon: '🍷', labelKey: 'cat_wine' },
-  { id: 'food',     icon: '🍽️', labelKey: 'cat_food' },
-  { id: 'coffee',   icon: '☕', labelKey: 'cat_coffee' },
+  { id: 'bar',       icon: <BarIcon />,       labelKey: 'cat_bar' },
+  { id: 'cocktails', icon: <CocktailsIcon />, labelKey: 'cat_cocktails' },
+  { id: 'spirits',   icon: <SpiritsIcon />,   labelKey: 'cat_spirits' },
+  { id: 'wine',      icon: <WineIcon />,      labelKey: 'cat_wine' },
+  { id: 'food',      icon: <FoodIcon />,      labelKey: 'cat_food' },
+  { id: 'coffee',    icon: <CoffeeIcon />,    labelKey: 'cat_coffee' },
 ];
 
 export default function App() {
