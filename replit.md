@@ -16,6 +16,16 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
 
+## Artifacts
+
+### ZOE Menu (`artifacts/zoe-menu`)
+Interactive digital menu for ZOE Premium Bar & Restaurant. React + Vite, no backend needed.
+- Default language: Italian. Supports EN, ES, DE, FR via language switcher.
+- 6 main categories with emoji icons: Bar, Cocktails, Spirits, Wine, Food, Coffee
+- Each item has an info button that opens a serving-guide modal (images to be added later)
+- Footer: opening hours (Mon 16-02, Tue closed, Wed-Sun 07-02), Instagram/WhatsApp/Google Review links
+- Logo: `public/logo.png`, Font: Cormorant Garamond
+
 ## Structure
 
 ```text
