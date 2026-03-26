@@ -205,12 +205,17 @@ const ip = {
   stroke: 'white', strokeWidth: 1.5, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
 };
 
-// Bar — freshly drafted beer mug with foam
+// Bar — Leffe-style chalice (round bowl, narrow waist, wide base, foam)
 const BarIcon = () => (
   <svg {...ip}>
-    <path d="M5 9 H17 L16 21 H6 Z" />
-    <path d="M5 9 Q7 5 9 9 Q11 5 13 9 Q15 5 17 9" />
-    <path d="M17 11 Q22 11 22 15 Q22 19 17 19" />
+    {/* Foam — 3 bumps */}
+    <path d="M7 8 Q8.5 4 10 8 Q12 4 14 8 Q15.5 4 17 8" />
+    {/* Left side: bowl curves out, pinches to waist, flares to base */}
+    <path d="M7 8 C5 11 5 16 10 18 L10 20 Q9 21 7 22" />
+    {/* Right side: mirror */}
+    <path d="M17 8 C19 11 19 16 14 18 L14 20 Q15 21 17 22" />
+    {/* Base */}
+    <line x1="7" y1="22" x2="17" y2="22" />
   </svg>
 );
 
