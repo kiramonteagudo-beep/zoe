@@ -339,17 +339,39 @@ const EVENTI_PHOTOS: { src: string; caption?: string }[] = [
 
 function EventiCarousel({ onClose }: { onClose: () => void }) {
   const [idx, setIdx] = useState(0);
+  const [dir, setDir] = useState(1);
   const touchX = useRef(0);
+  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   const total = EVENTI_PHOTOS.length;
 
-  function prev() { setIdx((i) => (i - 1 + total) % total); }
-  function next() { setIdx((i) => (i + 1) % total); }
+  function advance() { setDir(1); setIdx((i) => (i + 1) % total); }
+
+  function resetTimer() {
+    if (timer.current) clearInterval(timer.current);
+    timer.current = setInterval(advance, 4500);
+  }
+
+  useEffect(() => {
+    timer.current = setInterval(advance, 4500);
+    return () => { if (timer.current) clearInterval(timer.current); };
+  }, []);
+
+  function handlePrev() { setDir(-1); setIdx((i) => (i - 1 + total) % total); resetTimer(); }
+  function handleNext() { setDir(1);  setIdx((i) => (i + 1) % total); resetTimer(); }
 
   function onTouchStart(e: React.TouchEvent) { touchX.current = e.touches[0].clientX; }
   function onTouchEnd(e: React.TouchEvent) {
     const dx = e.changedTouches[0].clientX - touchX.current;
-    if (dx < -50) next();
-    else if (dx > 50) prev();
+    if (dx < -40) handleNext();
+    else if (dx > 40) handlePrev();
+  }
+
+  function slideClass(i: number) {
+    const rel = (i - idx + total) % total;
+    if (rel === 0) return 'ev-slide ev-current';
+    if (rel === 1) return 'ev-slide ev-next';
+    if (rel === total - 1) return 'ev-slide ev-prev';
+    return dir > 0 ? 'ev-slide ev-far-right' : 'ev-slide ev-far-left';
   }
 
   return (
@@ -360,10 +382,7 @@ function EventiCarousel({ onClose }: { onClose: () => void }) {
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
-        {/* Close */}
         <button className="eventi-close" onClick={onClose}>✕</button>
-
-        {/* Title */}
         <p className="eventi-title">EVENTI</p>
 
         {total === 0 ? (
@@ -377,23 +396,19 @@ function EventiCarousel({ onClose }: { onClose: () => void }) {
           </div>
         ) : (
           <>
-            <div className="eventi-slide">
-              <img src={EVENTI_PHOTOS[idx].src} alt={`Evento ${idx + 1}`} className="eventi-img" />
-              {EVENTI_PHOTOS[idx].caption && (
-                <p className="eventi-caption">{EVENTI_PHOTOS[idx].caption}</p>
-              )}
+            {/* slide track */}
+            <div className="ev-track">
+              {EVENTI_PHOTOS.map((p, i) => (
+                <img key={p.src} src={p.src} alt={`Evento ${i + 1}`} className={slideClass(i)} />
+              ))}
             </div>
-            {total > 1 && (
-              <>
-                <button className="eventi-arrow eventi-prev" onClick={prev}>&#8249;</button>
-                <button className="eventi-arrow eventi-next" onClick={next}>&#8250;</button>
-                <div className="eventi-dots">
-                  {EVENTI_PHOTOS.map((_, i) => (
-                    <button key={i} className={`eventi-dot ${i === idx ? 'active' : ''}`} onClick={() => setIdx(i)} />
-                  ))}
-                </div>
-              </>
-            )}
+
+            {/* arrows */}
+            <button className="eventi-arrow eventi-prev" onClick={handlePrev}>&#8249;</button>
+            <button className="eventi-arrow eventi-next" onClick={handleNext}>&#8250;</button>
+
+            {/* counter */}
+            <p className="ev-counter">{idx + 1} / {total}</p>
           </>
         )}
       </div>
