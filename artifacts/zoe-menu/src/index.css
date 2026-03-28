@@ -556,6 +556,60 @@ body {
 .gold { color: var(--gold); }
 .small-note { font-size: 0.78rem; color: #999; font-style: italic; text-align: center; margin: 1rem 0; }
 
+/* ─── BOTTOM GALLERY CAROUSEL ───────────────── */
+.bottom-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 2.5rem auto 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 4/3;
+}
+.bc-track {
+  width: 100%;
+  height: 100%;
+}
+.bc-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: bcFadeIn 0.4s ease;
+}
+@keyframes bcFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.bc-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(200,169,126,0.3);
+  color: rgba(255,255,255,0.85);
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  font-size: 1.9rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 2;
+  padding: 0;
+}
+.bc-arrow:hover {
+  background: rgba(200,169,126,0.25);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.bc-prev { left: 0.75rem; }
+.bc-next { right: 0.75rem; }
+
 /* ─── EVENTI BUTTON ──────────────────────────── */
 .eventi-btn {
   display: inline-flex;
