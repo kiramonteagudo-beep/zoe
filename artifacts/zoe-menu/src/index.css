@@ -574,21 +574,19 @@ body {
 }
 .bc-slide {
   position: absolute;
-  top: 0;
-  left: 50%;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
   border-radius: 6px;
-  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.55s ease;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.bc-current   { transform: translateX(-50%);   opacity: 1;    z-index: 2; }
-.bc-prev      { transform: translateX(-138%);  opacity: 0.28; z-index: 1; }
-.bc-next      { transform: translateX(38%);    opacity: 0.28; z-index: 1; }
-.bc-far-left  { transform: translateX(-220%);  opacity: 0;    z-index: 0; pointer-events: none; }
-.bc-far-right { transform: translateX(120%);   opacity: 0;    z-index: 0; pointer-events: none; }
+.bc-current   { transform: translateX(0);     z-index: 2; }
+.bc-prev      { transform: translateX(-100%); z-index: 1; }
+.bc-next      { transform: translateX(100%);  z-index: 1; }
+.bc-far-left  { transform: translateX(-100%); z-index: 0; pointer-events: none; }
+.bc-far-right { transform: translateX(100%);  z-index: 0; pointer-events: none; }
 .bc-btn {
   flex-shrink: 0;
   background: none;
@@ -649,24 +647,20 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.35);
+  background: none;
   border: none;
-  color: rgba(255,255,255,0.7);
-  font-size: 2.4rem;
+  color: rgba(255,255,255,0.65);
+  font-size: 3rem;
   line-height: 1;
-  width: 2.8rem;
-  height: 2.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
   cursor: pointer;
-  transition: all 0.2s;
-  padding: 0;
+  padding: 0.5rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+  transition: color 0.2s;
+  z-index: 3;
 }
-.lb-arrow:hover { color: var(--gold); background: rgba(0,0,0,0.55); }
-.lb-arrow-prev { left: -3rem; }
-.lb-arrow-next { right: -3rem; }
+.lb-arrow:hover { color: var(--gold); }
+.lb-arrow-prev { left: 0.4rem; }
+.lb-arrow-next { right: 0.4rem; }
 .lb-counter {
   position: absolute;
   bottom: -2rem;
@@ -675,6 +669,7 @@ body {
   font-size: 0.7rem;
   letter-spacing: 0.18em;
   color: rgba(244,241,236,0.3);
+  white-space: nowrap;
 }
 
 /* ─── EVENTI BUTTON ──────────────────────────── */
