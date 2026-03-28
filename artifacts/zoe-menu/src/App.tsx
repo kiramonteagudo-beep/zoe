@@ -215,35 +215,50 @@ const GALLERY_PHOTOS = [
 
 function BottomCarousel() {
   const [idx, setIdx] = useState(0);
+  const [dir, setDir] = useState(1);
   const total = GALLERY_PHOTOS.length;
   const touchX = useRef(0);
+  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  function next() { setIdx((i) => (i + 1) % total); }
-  function prev() { setIdx((i) => (i - 1 + total) % total); }
+  function advance() { setDir(1); setIdx((i) => (i + 1) % total); }
+
+  function resetTimer() {
+    if (timer.current) clearInterval(timer.current);
+    timer.current = setInterval(advance, 3500);
+  }
+
+  useEffect(() => {
+    timer.current = setInterval(advance, 3500);
+    return () => { if (timer.current) clearInterval(timer.current); };
+  }, []);
+
+  function handlePrev() { setDir(-1); setIdx((i) => (i - 1 + total) % total); resetTimer(); }
+  function handleNext() { setDir(1);  setIdx((i) => (i + 1) % total); resetTimer(); }
 
   function onTouchStart(e: React.TouchEvent) { touchX.current = e.touches[0].clientX; }
   function onTouchEnd(e: React.TouchEvent) {
     const dx = e.changedTouches[0].clientX - touchX.current;
-    if (dx < -40) next();
-    else if (dx > 40) prev();
+    if (dx < -40) handleNext();
+    else if (dx > 40) handlePrev();
+  }
+
+  function slideClass(i: number) {
+    const rel = (i - idx + total) % total;
+    if (rel === 0) return 'bc-slide bc-current';
+    if (rel === 1) return 'bc-slide bc-next';
+    if (rel === total - 1) return 'bc-slide bc-prev';
+    return dir > 0 ? 'bc-slide bc-far-right' : 'bc-slide bc-far-left';
   }
 
   return (
-    <div className="bc-row">
-      <button className="bc-arrow" onClick={prev} aria-label="Previous">&#8249;</button>
-
-      <div className="bottom-carousel" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+    <div className="bc-wrapper">
+      <button className="bc-btn" onClick={handlePrev} aria-label="Previous">&#8249;</button>
+      <div className="bc-viewport" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
         {GALLERY_PHOTOS.map((src, i) => (
-          <img
-            key={src}
-            src={src}
-            alt={`ZOE gallery ${i + 1}`}
-            className={`bc-img ${i === idx ? 'bc-img--active' : ''}`}
-          />
+          <img key={src} src={src} alt={`ZOE ${i + 1}`} className={slideClass(i)} />
         ))}
       </div>
-
-      <button className="bc-arrow" onClick={next} aria-label="Next">&#8250;</button>
+      <button className="bc-btn" onClick={handleNext} aria-label="Next">&#8250;</button>
     </div>
   );
 }
