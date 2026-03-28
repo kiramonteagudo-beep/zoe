@@ -197,6 +197,76 @@ function LangPicker({ lang, setLang }: { lang: Language; setLang: (l: Language) 
   );
 }
 
+// ─── EVENTI CAROUSEL ─────────────────────────────────────────────
+// Drop photo paths here once the user provides them:
+const EVENTI_PHOTOS: { src: string; caption?: string }[] = [
+  // { src: '/eventi/foto1.jpg', caption: 'Serata Jazz – Aprile 2025' },
+];
+
+function EventiCarousel({ onClose }: { onClose: () => void }) {
+  const [idx, setIdx] = useState(0);
+  const touchX = useRef(0);
+  const total = EVENTI_PHOTOS.length;
+
+  function prev() { setIdx((i) => (i - 1 + total) % total); }
+  function next() { setIdx((i) => (i + 1) % total); }
+
+  function onTouchStart(e: React.TouchEvent) { touchX.current = e.touches[0].clientX; }
+  function onTouchEnd(e: React.TouchEvent) {
+    const dx = e.changedTouches[0].clientX - touchX.current;
+    if (dx < -50) next();
+    else if (dx > 50) prev();
+  }
+
+  return (
+    <div className="eventi-overlay" onMouseDown={onClose}>
+      <div
+        className="eventi-modal"
+        onMouseDown={(e) => e.stopPropagation()}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        {/* Close */}
+        <button className="eventi-close" onClick={onClose}>✕</button>
+
+        {/* Title */}
+        <p className="eventi-title">EVENTI</p>
+
+        {total === 0 ? (
+          <div className="eventi-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(200,169,126,0.5)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
+            <p className="eventi-placeholder-text">Le foto degli eventi sono in arrivo…</p>
+          </div>
+        ) : (
+          <>
+            <div className="eventi-slide">
+              <img src={EVENTI_PHOTOS[idx].src} alt={`Evento ${idx + 1}`} className="eventi-img" />
+              {EVENTI_PHOTOS[idx].caption && (
+                <p className="eventi-caption">{EVENTI_PHOTOS[idx].caption}</p>
+              )}
+            </div>
+            {total > 1 && (
+              <>
+                <button className="eventi-arrow eventi-prev" onClick={prev}>&#8249;</button>
+                <button className="eventi-arrow eventi-next" onClick={next}>&#8250;</button>
+                <div className="eventi-dots">
+                  {EVENTI_PHOTOS.map((_, i) => (
+                    <button key={i} className={`eventi-dot ${i === idx ? 'active' : ''}`} onClick={() => setIdx(i)} />
+                  ))}
+                </div>
+              </>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ─── MAIN APP ────────────────────────────────────────────────────
 type MainCat = 'bar' | 'cocktails' | 'spirits' | 'wine' | 'food' | 'coffee';
 
@@ -287,6 +357,7 @@ export default function App() {
     coffee: 'coffee',
   });
   const [modal, setModal] = useState<ModalData | null>(null);
+  const [eventiOpen, setEventiOpen] = useState(false);
 
   function setSubTab(key: string) {
     setSubKey((prev) => ({ ...prev, [mainCat]: key }));
@@ -510,8 +581,9 @@ export default function App() {
 
   return (
     <>
-      {/* MODAL */}
+      {/* MODALS */}
       {modal && <ServingModal data={modal} t={t} onClose={closeModal} />}
+      {eventiOpen && <EventiCarousel onClose={() => setEventiOpen(false)} />}
 
       {/* LANGUAGE PICKER — fixed, always on top */}
       <div className="lang-bar">
@@ -523,6 +595,9 @@ export default function App() {
         <div className="header-bg" />
         <img src="/logo.png" alt="ZOE" className="header-logo" />
         <p className="header-tagline">{t.tagline}</p>
+        <button className="eventi-btn" onClick={() => setEventiOpen(true)}>
+          <span className="eventi-btn-diamond">◆</span> EVENTI <span className="eventi-btn-diamond">◆</span>
+        </button>
       </div>
 
       {/* CATEGORY GRID + SUB TABS (sticky) */}
