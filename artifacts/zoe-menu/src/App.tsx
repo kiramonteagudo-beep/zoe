@@ -216,8 +216,10 @@ const GALLERY_PHOTOS = [
 function BottomCarousel() {
   const [idx, setIdx] = useState(0);
   const [dir, setDir] = useState(1);
+  const [lbIdx, setLbIdx] = useState<number | null>(null); // lightbox
   const total = GALLERY_PHOTOS.length;
   const touchX = useRef(0);
+  const lbTouchX = useRef(0);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   function advance() { setDir(1); setIdx((i) => (i + 1) % total); }
@@ -232,14 +234,33 @@ function BottomCarousel() {
     return () => { if (timer.current) clearInterval(timer.current); };
   }, []);
 
+  // pause timer when lightbox is open
+  useEffect(() => {
+    if (lbIdx !== null) {
+      if (timer.current) clearInterval(timer.current);
+    } else {
+      resetTimer();
+    }
+  }, [lbIdx !== null]);
+
   function handlePrev() { setDir(-1); setIdx((i) => (i - 1 + total) % total); resetTimer(); }
   function handleNext() { setDir(1);  setIdx((i) => (i + 1) % total); resetTimer(); }
+
+  function lbPrev() { setLbIdx((i) => ((i ?? 0) - 1 + total) % total); }
+  function lbNext() { setLbIdx((i) => ((i ?? 0) + 1) % total); }
 
   function onTouchStart(e: React.TouchEvent) { touchX.current = e.touches[0].clientX; }
   function onTouchEnd(e: React.TouchEvent) {
     const dx = e.changedTouches[0].clientX - touchX.current;
     if (dx < -40) handleNext();
     else if (dx > 40) handlePrev();
+  }
+
+  function lbTouchStart(e: React.TouchEvent) { lbTouchX.current = e.touches[0].clientX; }
+  function lbTouchEnd(e: React.TouchEvent) {
+    const dx = e.changedTouches[0].clientX - lbTouchX.current;
+    if (dx < -40) lbNext();
+    else if (dx > 40) lbPrev();
   }
 
   function slideClass(i: number) {
@@ -251,15 +272,46 @@ function BottomCarousel() {
   }
 
   return (
-    <div className="bc-wrapper">
-      <button className="bc-btn" onClick={handlePrev} aria-label="Previous">&#8249;</button>
-      <div className="bc-viewport" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-        {GALLERY_PHOTOS.map((src, i) => (
-          <img key={src} src={src} alt={`ZOE ${i + 1}`} className={slideClass(i)} />
-        ))}
+    <>
+      <div className="bc-wrapper">
+        <button className="bc-btn" onClick={handlePrev} aria-label="Previous">&#8249;</button>
+        <div className="bc-viewport" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+          {GALLERY_PHOTOS.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt={`ZOE ${i + 1}`}
+              className={slideClass(i)}
+              onClick={i === idx ? () => setLbIdx(i) : undefined}
+              style={i === idx ? { cursor: 'zoom-in' } : undefined}
+            />
+          ))}
+        </div>
+        <button className="bc-btn" onClick={handleNext} aria-label="Next">&#8250;</button>
       </div>
-      <button className="bc-btn" onClick={handleNext} aria-label="Next">&#8250;</button>
-    </div>
+
+      {/* LIGHTBOX */}
+      {lbIdx !== null && (
+        <div className="lb-overlay" onMouseDown={() => setLbIdx(null)}>
+          <div
+            className="lb-box"
+            onMouseDown={(e) => e.stopPropagation()}
+            onTouchStart={lbTouchStart}
+            onTouchEnd={lbTouchEnd}
+          >
+            <button className="lb-close" onClick={() => setLbIdx(null)}>✕</button>
+            <img
+              src={GALLERY_PHOTOS[lbIdx]}
+              alt={`ZOE ${lbIdx + 1}`}
+              className="lb-img"
+            />
+            <button className="lb-arrow lb-arrow-prev" onClick={lbPrev}>&#8249;</button>
+            <button className="lb-arrow lb-arrow-next" onClick={lbNext}>&#8250;</button>
+            <p className="lb-counter">{lbIdx + 1} / {total}</p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
