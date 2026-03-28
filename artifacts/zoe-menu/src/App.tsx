@@ -217,47 +217,33 @@ function BottomCarousel() {
   const [idx, setIdx] = useState(0);
   const total = GALLERY_PHOTOS.length;
   const touchX = useRef(0);
-  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   function next() { setIdx((i) => (i + 1) % total); }
   function prev() { setIdx((i) => (i - 1 + total) % total); }
 
-  function resetTimer() {
-    if (timer.current) clearInterval(timer.current);
-    timer.current = setInterval(next, 4000);
-  }
-
-  useEffect(() => {
-    timer.current = setInterval(next, 4000);
-    return () => { if (timer.current) clearInterval(timer.current); };
-  }, []);
-
-  function handlePrev() { prev(); resetTimer(); }
-  function handleNext() { next(); resetTimer(); }
-
   function onTouchStart(e: React.TouchEvent) { touchX.current = e.touches[0].clientX; }
   function onTouchEnd(e: React.TouchEvent) {
     const dx = e.changedTouches[0].clientX - touchX.current;
-    if (dx < -40) handleNext();
-    else if (dx > 40) handlePrev();
+    if (dx < -40) next();
+    else if (dx > 40) prev();
   }
 
   return (
-    <div className="bottom-carousel">
-      <div
-        className="bc-track"
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-      >
-        <img
-          key={idx}
-          src={GALLERY_PHOTOS[idx]}
-          alt={`ZOE gallery ${idx + 1}`}
-          className="bc-img"
-        />
+    <div className="bc-row">
+      <button className="bc-arrow" onClick={prev} aria-label="Previous">&#8249;</button>
+
+      <div className="bottom-carousel" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+        {GALLERY_PHOTOS.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt={`ZOE gallery ${i + 1}`}
+            className={`bc-img ${i === idx ? 'bc-img--active' : ''}`}
+          />
+        ))}
       </div>
-      <button className="bc-arrow bc-prev" onClick={handlePrev} aria-label="Previous">&#8249;</button>
-      <button className="bc-arrow bc-next" onClick={handleNext} aria-label="Next">&#8250;</button>
+
+      <button className="bc-arrow" onClick={next} aria-label="Next">&#8250;</button>
     </div>
   );
 }

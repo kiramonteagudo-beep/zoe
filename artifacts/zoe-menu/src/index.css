@@ -557,38 +557,42 @@ body {
 .small-note { font-size: 0.78rem; color: #999; font-style: italic; text-align: center; margin: 1rem 0; }
 
 /* ─── BOTTOM GALLERY CAROUSEL ───────────────── */
+.bc-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1.2rem auto 1.8rem;
+  max-width: 420px;
+  padding: 0 0.5rem;
+}
 .bottom-carousel {
   position: relative;
-  width: 100%;
-  max-width: 360px;
-  margin: 1.2rem auto 1.8rem;
+  flex: 1;
+  height: 200px;
   border-radius: 6px;
   overflow: hidden;
   background: #000;
-  height: 200px;
-}
-.bc-track {
-  width: 100%;
-  height: 100%;
 }
 .bc-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  animation: bcFadeIn 0.4s ease;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
 }
-@keyframes bcFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.bc-img--active {
+  opacity: 1;
+  pointer-events: auto;
 }
 .bc-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
-  border: 1px solid rgba(200,169,126,0.3);
-  color: rgba(255,255,255,0.85);
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid rgba(200,169,126,0.35);
+  color: rgba(200,169,126,0.7);
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
@@ -599,16 +603,13 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s;
-  z-index: 2;
   padding: 0;
 }
 .bc-arrow:hover {
-  background: rgba(200,169,126,0.25);
   border-color: var(--gold);
   color: var(--gold);
+  background: rgba(200,169,126,0.08);
 }
-.bc-prev { left: 0.5rem; }
-.bc-next { right: 0.5rem; }
 
 /* ─── EVENTI BUTTON ──────────────────────────── */
 .eventi-btn {
