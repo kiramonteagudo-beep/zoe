@@ -318,7 +318,23 @@ function BottomCarousel() {
 // ─── EVENTI CAROUSEL ─────────────────────────────────────────────
 // Drop photo paths here once the user provides them:
 const EVENTI_PHOTOS: { src: string; caption?: string }[] = [
-  // { src: '/eventi/foto1.jpg', caption: 'Serata Jazz – Aprile 2025' },
+  { src: '/eventi/e1.jpg' },
+  { src: '/eventi/e2.jpg' },
+  { src: '/eventi/e3.jpg' },
+  { src: '/eventi/e4.jpg' },
+  { src: '/eventi/e5.jpg' },
+  { src: '/eventi/e6.jpg' },
+  { src: '/eventi/e7.jpg' },
+  { src: '/eventi/e8.jpg' },
+  { src: '/eventi/e9.jpg' },
+  { src: '/eventi/e10.jpg' },
+  { src: '/eventi/e11.jpg' },
+  { src: '/eventi/e12.jpg' },
+  { src: '/eventi/e13.jpg' },
+  { src: '/eventi/e14.jpg' },
+  { src: '/eventi/e15.jpg' },
+  { src: '/eventi/e16.jpg' },
+  { src: '/eventi/e17.jpg' },
 ];
 
 function EventiCarousel({ onClose }: { onClose: () => void }) {
