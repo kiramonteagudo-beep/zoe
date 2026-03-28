@@ -560,12 +560,12 @@ body {
 .bottom-carousel {
   position: relative;
   width: 100%;
-  max-width: 500px;
-  margin: 2.5rem auto 0;
+  max-width: 360px;
+  margin: 1.2rem auto 1.8rem;
   border-radius: 6px;
   overflow: hidden;
   background: #000;
-  aspect-ratio: 4/3;
+  height: 200px;
 }
 .bc-track {
   width: 100%;
@@ -586,13 +586,13 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.4);
   border: 1px solid rgba(200,169,126,0.3);
   color: rgba(255,255,255,0.85);
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
-  font-size: 1.9rem;
+  font-size: 1.5rem;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -607,8 +607,8 @@ body {
   border-color: var(--gold);
   color: var(--gold);
 }
-.bc-prev { left: 0.75rem; }
-.bc-next { right: 0.75rem; }
+.bc-prev { left: 0.5rem; }
+.bc-next { right: 0.5rem; }
 
 /* ─── EVENTI BUTTON ──────────────────────────── */
 .eventi-btn {

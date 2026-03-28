@@ -691,9 +691,6 @@ export default function App() {
         {renderContent()}
       </div>
 
-      {/* BOTTOM GALLERY CAROUSEL */}
-      <BottomCarousel />
-
       {/* FOOTER */}
       <div className="footer">
         <p className="footer-section-title">{t.openingHours}</p>
@@ -730,6 +727,8 @@ export default function App() {
             {t.leaveReview}
           </a>
         </div>
+
+        <BottomCarousel />
 
         <div className="footer-address">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ flexShrink: 0, opacity: 0.6 }}>
