@@ -425,12 +425,15 @@ const COCKTAIL_STRIP_PHOTOS = [
 
 function CocktailPhotoStrip() {
   return (
-    <div className="cph-strip">
-      {COCKTAIL_STRIP_PHOTOS.map((src, i) => (
-        <div key={i} className="cph-cell">
-          <img src={src} alt={`Cocktail ${i + 1}`} className="cph-img" />
-        </div>
-      ))}
+    <div className="cph-wrapper">
+      <p className="cph-title">I più amati</p>
+      <div className="cph-strip">
+        {COCKTAIL_STRIP_PHOTOS.map((src, i) => (
+          <div key={i} className="cph-cell">
+            <img src={src} alt={`Cocktail ${i + 1}`} className="cph-img" />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

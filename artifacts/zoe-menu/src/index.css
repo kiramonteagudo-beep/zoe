@@ -474,10 +474,23 @@ body {
 }
 
 /* ─── COCKTAIL PHOTO STRIP ───────────────────── */
+.cph-wrapper {
+  width: 100%;
+  margin-top: 2.5rem;
+}
+.cph-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
 .cph-strip {
   display: flex;
   width: 100%;
-  margin-top: 2rem;
 }
 .cph-cell {
   flex: 1;
