@@ -416,6 +416,25 @@ function EventiCarousel({ onClose }: { onClose: () => void }) {
   );
 }
 
+// ─── COCKTAIL PHOTO STRIP ────────────────────────────────────────
+const COCKTAIL_STRIP_PHOTOS = [
+  '/cocktail-photo1.jpg',
+  '/cocktail-photo2.jpg',
+  '/cocktail-photo3.jpg',
+];
+
+function CocktailPhotoStrip() {
+  return (
+    <div className="cph-strip">
+      {COCKTAIL_STRIP_PHOTOS.map((src, i) => (
+        <div key={i} className="cph-cell">
+          <img src={src} alt={`Cocktail ${i + 1}`} className="cph-img" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ─── MAIN APP ────────────────────────────────────────────────────
 type MainCat = 'bar' | 'cocktails' | 'spirits' | 'wine' | 'food' | 'coffee';
 
@@ -599,6 +618,7 @@ export default function App() {
             <SigCard key={i.name} item={i} lang={lang} onInfo={() => openModal({ name: i.name, description: i.descriptions[lang] })} />
           ))}
           <p className="small-note" style={{ marginTop: '1.5rem' }}>{t.signatureNote}</p>
+          <CocktailPhotoStrip />
         </>
       );
       if (currentSub === 'mocktails') return (
@@ -607,6 +627,7 @@ export default function App() {
           {mocktails.map((i) => (
             <SigCard key={i.name} item={i} lang={lang} onInfo={() => openModal({ name: i.name, description: i.descriptions[lang] })} />
           ))}
+          <CocktailPhotoStrip />
         </>
       );
     }

@@ -473,6 +473,27 @@ body {
   padding-top: 0.75rem;
 }
 
+/* ─── COCKTAIL PHOTO STRIP ───────────────────── */
+.cph-strip {
+  display: flex;
+  width: 100%;
+  margin-top: 2rem;
+}
+.cph-cell {
+  flex: 1;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,169,126,0.1);
+}
+.cph-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
 /* ─── FOOTER ──────────────────────────────────── */
 .footer {
   background: var(--navy-dark);
